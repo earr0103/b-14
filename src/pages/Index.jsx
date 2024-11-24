@@ -2,30 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FloatingLabelInput from '../components/FloatingLabelInput';
 import BillToSection from '../components/BillToSection';
-import ShipToSection from '../components/ShipToSection';
 import ItemDetails from "../components/ItemDetails";
-import { templates } from "../utils/templateRegistry";
-import { FiEdit, FiFileText, FiTrash2 } from "react-icons/fi"; // Added FiTrash2 icon
+import FormHeader from '../components/FormHeader';
+import InvoiceInformation from '../components/InvoiceInformation';
 import { RefreshCw } from "lucide-react";
-import { set, sub } from "date-fns";
-
-const generateRandomInvoiceNumber = () => {
-  const length = Math.floor(Math.random() * 6) + 3;
-  const alphabetCount = Math.min(Math.floor(Math.random() * 4), length);
-  let result = "";
-  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const numbers = "0123456789";
-
-  for (let i = 0; i < alphabetCount; i++) {
-    result += alphabet[Math.floor(Math.random() * alphabet.length)];
-  }
-
-  for (let i = alphabetCount; i < length; i++) {
-    result += numbers[Math.floor(Math.random() * numbers.length)];
-  }
-
-  return result;
-};
+import { templates } from "../utils/templateRegistry";
 
 const noteOptions = [
   "Thank you for choosing us today! We hope your shopping experience was pleasant and seamless. Your satisfaction matters to us, and we look forward to serving you again soon. Keep this receipt for any returns or exchanges.",
@@ -51,10 +32,27 @@ const noteOptions = [
   "We appreciate your trust in us. If you ever need assistance with your order, please visit our website or call customer service. We’re here to help!",
 ];
 
+const generateRandomInvoiceNumber = () => {
+  const length = Math.floor(Math.random() * 6) + 3;
+  const alphabetCount = Math.min(Math.floor(Math.random() * 4), length);
+  let result = "";
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const numbers = "0123456789";
+
+  for (let i = 0; i < alphabetCount; i++) {
+    result += alphabet[Math.floor(Math.random() * alphabet.length)];
+  }
+
+  for (let i = alphabetCount; i < length; i++) {
+    result += numbers[Math.floor(Math.random() * numbers.length)];
+  }
+
+  return result;
+};
+
 const Index = () => {
   const navigate = useNavigate();
   const [billTo, setBillTo] = useState({ name: "", address: "", phone: "" });
-  const [shipTo, setShipTo] = useState({ name: "", address: "", phone: "" });
   const [invoice, setInvoice] = useState({
     date: "",
     paymentDate: "",
@@ -78,12 +76,10 @@ const Index = () => {
   };
 
   useEffect(() => {
-    // Load form data from localStorage on component mount
     const savedFormData = localStorage.getItem("formData");
     if (savedFormData) {
       const parsedData = JSON.parse(savedFormData);
       setBillTo(parsedData.billTo || { name: "", address: "", phone: "" });
-      setShipTo(parsedData.shipTo || { name: "", address: "", phone: "" });
       setInvoice(
         parsedData.invoice || { date: "", paymentDate: "", number: "" }
       );
@@ -94,7 +90,6 @@ const Index = () => {
       settaxPercentage(parsedData.taxPercentage || 0);
       setNotes(parsedData.notes || "");
     } else {
-      // If no saved data, set invoice number
       setInvoice((prev) => ({
         ...prev,
         number: generateRandomInvoiceNumber(),
@@ -103,10 +98,8 @@ const Index = () => {
   }, []);
 
   useEffect(() => {
-    // Save form data to localStorage whenever it changes
     const formData = {
       billTo,
-      shipTo,
       invoice,
       yourCompany,
       items,
@@ -119,7 +112,6 @@ const Index = () => {
     localStorage.setItem("formData", JSON.stringify(formData));
   }, [
     billTo,
-    shipTo,
     invoice,
     yourCompany,
     items,
@@ -193,7 +185,6 @@ const Index = () => {
   const handleTemplateClick = (templateNumber) => {
     const formData = {
       billTo,
-      shipTo,
       invoice,
       yourCompany,
       items,
@@ -213,11 +204,6 @@ const Index = () => {
       name: "John Doe",
       address: "123 Main St, Anytown, USA",
       phone: "(555) 123-4567",
-    });
-    setShipTo({
-      name: "Jane Smith",
-      address: "456 Elm St, Othertown, USA",
-      phone: "(555) 987-6543",
     });
     setInvoice({
       date: new Date().toISOString().split("T")[0],
@@ -282,7 +268,6 @@ const Index = () => {
 
   const clearForm = () => {
     setBillTo({ name: "", address: "", phone: "" });
-    setShipTo({ name: "", address: "", phone: "" });
     setInvoice({
       date: "",
       paymentDate: "",
@@ -297,44 +282,22 @@ const Index = () => {
 
   return (
     <div className="container mx-auto px-4 py-8 relative">
-      <h1 className="text-3xl font-bold mb-8 text-center">Bill Generator</h1>
-      <div className="fixed top-4 left-4 flex gap-2">
-        <button
-          onClick={clearForm}
-          className="bg-red-500 text-white p-2 rounded-full shadow-lg hover:bg-red-600"
-          aria-label="Clear Form"
-        >
-          <FiTrash2 size={24} />
-        </button>
-        <button
-          onClick={fillDummyData}
-          className="bg-blue-500 text-white p-2 rounded-full shadow-lg hover:bg-blue-600"
-          aria-label="Fill with Dummy Data"
-        >
-          <FiEdit size={24} />
-        </button>
-      </div>
-      <button
-        onClick={() =>
-          navigate("/receipt", {
-            state: {
-              formData: {
-                billTo,
-                shipTo,
-                invoice,
-                yourCompany,
-                items,
-                taxPercentage,
-                notes,
-              },
+      <FormHeader 
+        onClear={clearForm}
+        onFillDummy={fillDummyData}
+        onNavigateToReceipt={() => navigate("/receipt", {
+          state: {
+            formData: {
+              billTo,
+              invoice,
+              yourCompany,
+              items,
+              taxPercentage,
+              notes,
             },
-          })
-        }
-        className="fixed top-4 right-4 bg-green-500 text-white p-2 rounded-full shadow-lg hover:bg-green-600"
-        aria-label="Switch to Receipt"
-      >
-        <FiFileText size={24} />
-      </button>
+          },
+        })}
+      />
       <div className="flex flex-col md:flex-row gap-8">
         <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
           <form>
@@ -342,43 +305,10 @@ const Index = () => {
               billTo={billTo}
               handleInputChange={handleInputChange(setBillTo)}
             />
-            <ShipToSection
-              shipTo={shipTo}
-              handleInputChange={handleInputChange(setShipTo)}
-              billTo={billTo}
+            <InvoiceInformation 
+              invoice={invoice}
+              handleInputChange={handleInputChange(setInvoice)}
             />
-
-            <div className="mb-6">
-              <h2 className="text-2xl font-semibold mb-4">
-                Invoice Information
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <FloatingLabelInput
-                  id="invoiceNumber"
-                  label="Invoice Number"
-                  value={invoice.number}
-                  onChange={handleInputChange(setInvoice)}
-                  name="number"
-                />
-                <FloatingLabelInput
-                  id="invoiceDate"
-                  label="Invoice Date"
-                  type="date"
-                  value={invoice.date}
-                  onChange={handleInputChange(setInvoice)}
-                  name="date"
-                />
-                <FloatingLabelInput
-                  id="paymentDate"
-                  label="Payment Date"
-                  type="date"
-                  value={invoice.paymentDate}
-                  onChange={handleInputChange(setInvoice)}
-                  name="paymentDate"
-                />
-              </div>
-            </div>
-
             <div className="mb-6">
               <h2 className="text-2xl font-semibold mb-4">Your Company</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -406,14 +336,12 @@ const Index = () => {
                 className="mt-4"
               />
             </div>
-
             <ItemDetails
               items={items}
               handleItemChange={handleItemChange}
               addItem={addItem}
               removeItem={removeItem}
             />
-
             <div className="mb-6">
               <h3 className="text-lg font-medium mb-2">Totals</h3>
               <div className="flex justify-between mb-2">
@@ -441,7 +369,6 @@ const Index = () => {
                 <span>₹ {grandTotal}</span>
               </div>
             </div>
-
             <div className="mb-6">
               <div className="flex items-center mb-2">
                 <h3 className="text-lg font-medium">Notes</h3>
@@ -461,15 +388,9 @@ const Index = () => {
                 rows="4"
               ></textarea>
             </div>
-
-            {/* Clear Form button removed */}
           </form>
         </div>
-
-        <div
-          className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md overflow-y-auto"
-          // style={{ maxHeight: "calc(100vh - 2rem)" }}
-        >
+        <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md overflow-y-auto">
           <h2 className="text-2xl font-semibold mb-4">Template Gallery</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {templates.map((template, index) => (

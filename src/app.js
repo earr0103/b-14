@@ -1,7 +1,6 @@
 document.addEventListener('alpine:init', () => {
   Alpine.data('billGenerator', () => ({
     billTo: { name: '', address: '', phone: '' },
-    shipTo: { name: '', address: '', phone: '' },
     invoice: { date: '', paymentDate: '' },
     from: { name: '', address: '', phone: '' },
     items: [{ sno: 1, name: '', description: '', quantity: 0, amount: 0, total: 0 }],
@@ -38,7 +37,6 @@ document.addEventListener('alpine:init', () => {
     saveData() {
       localStorage.setItem('billData', JSON.stringify({
         billTo: this.billTo,
-        shipTo: this.shipTo,
         invoice: this.invoice,
         from: this.from,
         items: this.items,
@@ -53,7 +51,6 @@ document.addEventListener('alpine:init', () => {
       if (savedData) {
         const data = JSON.parse(savedData);
         this.billTo = data.billTo;
-        this.shipTo = data.shipTo;
         this.invoice = data.invoice;
         this.from = data.from;
         this.items = data.items;
@@ -66,7 +63,6 @@ document.addEventListener('alpine:init', () => {
       if (confirm('Are you sure you want to clear all data?')) {
         localStorage.removeItem('billData');
         this.billTo = { name: '', address: '', phone: '' };
-        this.shipTo = { name: '', address: '', phone: '' };
         this.invoice = { date: '', paymentDate: '' };
         this.from = { name: '', address: '', phone: '' };
         this.items = [{ sno: 1, name: '', description: '', quantity: 0, amount: 0, total: 0 }];
@@ -76,9 +72,7 @@ document.addEventListener('alpine:init', () => {
     },
 
     selectTemplate(template) {
-      // In a real application, this would navigate to a new page with the selected template
       alert(`Selected template: ${template.name}`);
-      // Here you would typically use a router to navigate to a new page, passing the form data and selected template
     }
   }));
 });
