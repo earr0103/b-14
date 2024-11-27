@@ -30,29 +30,29 @@ const Receipt3 = ({ data, isPrint = false }) => {
       >
         <div className="flex-grow">
           <div className="text-center font-bold mb-2 pb-2 border-b-2 border-dashed">
-            CASH RECEIPT
+            RECIBO DE CAJA
             {yourCompany.name && <div className="mt-2">{yourCompany.name}</div>}
             {yourCompany.address && <div>{yourCompany.address}</div>}
             {yourCompany.phone && <div>{yourCompany.phone}</div>}
           </div>
           <div className="mb-2 text-right">
-            <div><strong>Invoice#:</strong> {invoice.number || "N/A"}</div>
+            <div><strong>Factura#:</strong> {invoice.number || "N/A"}</div>
             <div>
-              <strong>Date:</strong>{" "}
+              <strong>Fecha:</strong>{" "}
               {invoice.date
                 ? format(new Date(invoice.date), "MM/dd/yyyy")
                 : "N/A"}
             </div>
           </div>
-          <div className="mb-2"><strong>Customer:</strong> {billTo || "N/A"}</div>
+          <div className="mb-2"><strong>Cliente:</strong> {billTo || "N/A"}</div>
           <div className="mb-2 pb-2 border-b-2 border-dashed">
-            <strong>Cashier:</strong> {cashier || "N/A"}
+            <strong>Cajero:</strong> {cashier || "N/A"}
           </div>
           <div className="py-2 mb-2">
             <div className="flex justify-between font-extrabold mb-2">
-              <span>Item</span>
-              <span>Qty</span>
-              <span>Amt</span>
+              <span>Artículo</span>
+              <span>Cant</span>
+              <span>Precio</span>
               <span>Total</span>
             </div>
             {items.map((item, index) => (
@@ -69,17 +69,17 @@ const Receipt3 = ({ data, isPrint = false }) => {
             ))}
           </div>
           <div className="flex justify-between">
-            <span>SubTotal:</span>
+            <span>Subtotal:</span>
             <span>{formatCurrency(subTotal)}</span>
           </div>
           {taxPercentage > 0 && (
             <div className="flex justify-between">
-              <span>Tax ({taxPercentage}%):</span>
+              <span>IVA ({taxPercentage}%):</span>
               <span>{formatCurrency(taxAmount)}</span>
             </div>
           )}
           <div className="flex justify-between font-bold mt-2 pb-2 border-t-2 pt-2 border-b-2 border-dashed">
-            <span>{`${items.length} Items`}</span>
+            <span>{`${items.length} Artículos`}</span>
             <span>Total: {formatCurrency(total)}</span>
           </div>
           {notes && (

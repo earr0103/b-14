@@ -11,19 +11,19 @@ const Template4 = ({ data }) => {
       <div className="bg-white p-8 max-w-4xl mx-auto">
         <div className="flex justify-between items-start mb-8">
           <div>
-            <h1 className="text-4xl font-bold text-purple-600 mb-4">Invoice</h1>
+            <h1 className="text-4xl font-bold text-purple-600 mb-4">Factura</h1>
             <p>
-              <span className="font-semibold">Invoice#:</span>{" "}
+              <span className="font-semibold">Factura#:</span>{" "}
               {invoice.number || "N/A"}
             </p>
             <p>
-              <span className="font-semibold">Invoice Date:</span>{" "}
+              <span className="font-semibold">Fecha de Emisión:</span>{" "}
               {invoice.date
                 ? format(new Date(invoice.date), "MMM dd, yyyy")
                 : "N/A"}
             </p>
             <p>
-              <span className="font-semibold">Due Date:</span>{" "}
+              <span className="font-semibold">Fecha de Vencimiento:</span>{" "}
               {invoice.paymentDate
                 ? format(new Date(invoice.paymentDate), "MMM dd, yyyy")
                 : "N/A"}
@@ -31,33 +31,33 @@ const Template4 = ({ data }) => {
           </div>
           <div className="text-right">
             <h2 className="text-2xl font-bold">
-              {yourCompany.name || "Company Name"}
+              {yourCompany.name || "Nombre de la Empresa"}
             </h2>
-            <p>{yourCompany.address || "Company Address"}</p>
-            <p>{yourCompany.phone || "Company Phone"}</p>
+            <p>{yourCompany.address || "Dirección de la Empresa"}</p>
+            <p>{yourCompany.phone || "Teléfono de la Empresa"}</p>
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-8 mb-8">
           <div className="bg-gray-100 p-4 rounded">
             <h3 className="text-lg font-semibold text-purple-600 mb-2">
-              Billed by
+              Facturado por
             </h3>
             <p>
-              <strong>{yourCompany.name || "Company Name"}</strong>
+              <strong>{yourCompany.name || "Nombre de la Empresa"}</strong>
             </p>
-            <p>{yourCompany.address || "Company Address"}</p>
-            <p>{yourCompany.phone || "Company Phone"}</p>
+            <p>{yourCompany.address || "Dirección de la Empresa"}</p>
+            <p>{yourCompany.phone || "Teléfono de la Empresa"}</p>
           </div>
           <div className="bg-gray-100 p-4 rounded">
             <h3 className="text-lg font-semibold text-purple-600 mb-2">
-              Billed to
+              Facturado a
             </h3>
             <p>
-              <strong>{billTo.name || "Client Name"}</strong>
+              <strong>{billTo.name || "Nombre del Cliente"}</strong>
             </p>
-            <p>{billTo.address || "Client Address"}</p>
-            <p>{billTo.phone || "Client Phone"}</p>
+            <p>{billTo.address || "Dirección del Cliente"}</p>
+            <p><span className="font-semibold">RUC:</span> {billTo.ruc || "N/A"}</p>
           </div>
         </div>
 
@@ -65,21 +65,21 @@ const Template4 = ({ data }) => {
           <thead className="bg-purple-600 text-white">
             <tr>
               <th className="p-2 text-left border border-gray-300">
-                Item #/Item Description
+                Artículo #/Descripción
               </th>
-              <th className="p-2 text-right border border-gray-300">Qty.</th>
-              <th className="p-2 text-right border border-gray-300">Rate</th>
-              <th className="p-2 text-right border border-gray-300">Amount</th>
+              <th className="p-2 text-right border border-gray-300">Cant.</th>
+              <th className="p-2 text-right border border-gray-300">Precio</th>
+              <th className="p-2 text-right border border-gray-300">Monto</th>
             </tr>
           </thead>
           <tbody>
             {items.map((item, index) => (
               <tr key={index} className="bg-gray-100">
                 <td className="p-2 border border-gray-300">
-                  {`${index + 1}. ${item.name || "Item Name"}`}
+                  {`${index + 1}. ${item.name || "Nombre del Artículo"}`}
                   <br />
                   <span className="text-sm text-gray-600">
-                    {item.description || "Item Description"}
+                    {item.description || "Descripción del Artículo"}
                   </span>
                 </td>
                 <td className="p-2 text-right border border-gray-300">
@@ -99,12 +99,12 @@ const Template4 = ({ data }) => {
         <div className="flex justify-end mb-8">
           <div className="w-1/3">
             <p className="flex justify-between">
-              <span>Sub Total:</span> <span>{formatCurrency(subTotal)}</span>
+              <span>Subtotal:</span> <span>{formatCurrency(subTotal)}</span>
             </p>
             {taxPercentage > 0 && (
               <>
                 <p className="flex justify-between">
-                  <span>Tax({taxPercentage}%):</span> <span>{taxAmount}</span>
+                  <span>IVA ({taxPercentage}%):</span> <span>{taxAmount}</span>
                 </p>
               </>
             )}
@@ -117,7 +117,7 @@ const Template4 = ({ data }) => {
 
         {notes && (
           <div className="mb-8">
-            <h3 className="text-lg font-semibold text-purple-600 mb-2">Note</h3>
+            <h3 className="text-lg font-semibold text-purple-600 mb-2">Notas</h3>
             <p>{notes}</p>
           </div>
         )}

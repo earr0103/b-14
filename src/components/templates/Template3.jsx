@@ -12,16 +12,16 @@ const Template3 = ({ data }) => {
           <div>
             <div className="text-white inline-block">
               <h1 className="text-2xl font-bold" id="company-name">
-                {yourCompany?.name || "Your Company Name"}
+                {yourCompany?.name || "Nombre de su empresa"}
               </h1>
             </div>
             <p className="mt-2">
-              {yourCompany?.address || "Your Company Address"}
+              {yourCompany?.address || "Dirección de su empresa"}
             </p>
-            <p>{yourCompany?.phone || "Your Company Phone"}</p>
+            <p>{yourCompany?.phone || "Teléfono de su empresa"}</p>
           </div>
           <div>
-            <h2 className="text-xl font-semibold mb-2">BILLED TO</h2>
+            <h2 className="text-xl font-semibold mb-2">FACTURADO A</h2>
             <p>{billTo.name}</p>
             <p>{billTo.address}</p>
             <p>{billTo.phone}</p>
@@ -29,16 +29,16 @@ const Template3 = ({ data }) => {
         </div>
         <div className="flex justify-between mb-8">
           <div>
-            <h2 className="text-xl font-semibold mb-2">SHIP TO</h2>
+            <h2 className="text-xl font-semibold mb-2">ENVIAR A</h2>
             <p>{shipTo.name}</p>
             <p>{shipTo.address}</p>
             <p>{shipTo.phone}</p>
           </div>
           <div className="text-right">
-            <p>Invoice #: {invoice.number}</p>
-            <p>Invoice Date: {invoice.date}</p>
-            <p>Due Date: {invoice.paymentDate}</p>
-            <p>Due Amount: {formatCurrency(grandTotal)}</p>
+            <p>Factura #: {invoice.number}</p>
+            <p>Fecha de Emisión: {invoice.date}</p>
+            <p>Fecha de Vencimiento: {invoice.paymentDate}</p>
+            <p>Monto a Pagar: {formatCurrency(grandTotal)}</p>
           </div>
         </div>
       </div>
@@ -47,10 +47,10 @@ const Template3 = ({ data }) => {
           <div className="bg-blue-200 flex rounded-t">
             <div className="p-2 w-12"></div>
             <div className="p-2 flex-grow text-left">
-              ITEM NAME/ITEM DESCRIPTION
+              NOMBRE/DESCRIPCIÓN DEL ARTÍCULO
             </div>
-            <div className="p-2 flex-1 text-right">QTY.</div>
-            <div className="p-2 flex-1 text-right">AMOUNT</div>
+            <div className="p-2 flex-1 text-right">CANT.</div>
+            <div className="p-2 flex-1 text-right">MONTO</div>
           </div>
           {items.map((item, index) => (
             <div key={index} className="flex border-t border-b">
@@ -70,17 +70,17 @@ const Template3 = ({ data }) => {
         </div>
         <div className="flex justify-between">
           <div className="w-2/3 p-4">
-            <h3 className="text-lg font-semibold">Notes</h3>
+            <h3 className="text-lg font-semibold">Notas</h3>
             <p className="text-sm text-gray-600">{notes}</p>
           </div>
           <div className="w-1/3">
             <div className="flex justify-between mb-2 p-2">
-              <span>Sub Total:</span>
+              <span>Subtotal:</span>
               <span>{formatCurrency(subTotal)}</span>
             </div>
             {taxPercentage > 0 && (
               <div className="flex justify-between mb-2 p-2">
-                <span>Tax ({taxPercentage}%):</span>
+                <span>IVA ({taxPercentage}%):</span>
                 <span>{formatCurrency(taxAmount)}</span>
               </div>
             )}

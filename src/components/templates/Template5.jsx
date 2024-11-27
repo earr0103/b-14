@@ -12,36 +12,36 @@ const Template5 = ({ data = {} }) => {
         <div className="p-8">
           <div className="flex justify-between items-start">
             <div>
-              <h1 className="text-4xl font-bold text-green-600">Invoice</h1>
+              <h1 className="text-4xl font-bold text-green-600">Factura</h1>
             </div>
             <div className="text-right">
               <h2 className="text-xl font-bold">
-                {yourCompany.name || "Company Name"}
+                {yourCompany.name || "Nombre de la Empresa"}
               </h2>
-              <p>{yourCompany.address || "Company Address"}</p>
-              <p>{yourCompany.phone || "Company Phone"}</p>
+              <p>{yourCompany.address || "Dirección de la Empresa"}</p>
+              <p>{yourCompany.phone || "Teléfono de la Empresa"}</p>
             </div>
           </div>
 
           <div className="flex justify-between mb-8 mt-4">
             <div className="text-left w-1/2">
               <h3 className="text-lg font-semibold text-green-600 mb-2">
-                Billed to
+                Facturado a
               </h3>
-              <p className="font-bold">{billTo.name || "Client Name"}</p>
-              <p>{billTo.address || "Client Address"}</p>
-              <p>{billTo.phone || "Client Phone"}</p>
+              <p className="font-bold">{billTo.name || "Nombre del Cliente"}</p>
+              <p>{billTo.address || "Dirección del Cliente"}</p>
+              <p>{billTo.phone || "Teléfono del Cliente"}</p>
             </div>
             <div className="text-right w-1/3">
               <h3 className="text-lg font-semibold text-green-600 mb-2 text-left">
-                Invoice Details
+                Detalles de la Factura
               </h3>
               <p className="flex justify-between">
-                <span className="font-semibold">Invoice #:</span>
+                <span className="font-semibold">Factura #:</span>
                 <span>{invoice.number || "N/A"}</span>
               </p>
               <p className="flex justify-between">
-                <span className="font-semibold">Invoice Date:</span>
+                <span className="font-semibold">Fecha de Emisión:</span>
                 <span>
                   {invoice.date
                     ? format(new Date(invoice.date), "MMM dd, yyyy")
@@ -49,7 +49,7 @@ const Template5 = ({ data = {} }) => {
                 </span>
               </p>
               <p className="flex justify-between">
-                <span className="font-semibold">Due Date:</span>
+                <span className="font-semibold">Fecha de Vencimiento:</span>
                 <span>
                   {invoice.paymentDate
                     ? format(new Date(invoice.paymentDate), "MMM dd, yyyy")
@@ -62,10 +62,10 @@ const Template5 = ({ data = {} }) => {
           <table className="w-full mb-8 border border-green-600">
             <thead className="bg-green-600 text-white">
               <tr>
-                <th className="p-2 text-left">Item #/Item description</th>
-                <th className="p-2 text-right">Qty.</th>
-                <th className="p-2 text-right">Rate</th>
-                <th className="p-2 text-right">Amount</th>
+                <th className="p-2 text-left">Artículo #/Descripción</th>
+                <th className="p-2 text-right">Cant.</th>
+                <th className="p-2 text-right">Precio</th>
+                <th className="p-2 text-right">Monto</th>
               </tr>
             </thead>
             <tbody>
@@ -74,7 +74,7 @@ const Template5 = ({ data = {} }) => {
                   key={index}
                   className={index % 2 === 0 ? "bg-green-50" : ""}
                 >
-                  <td className="p-2">{item.name || "Item Name"}</td>
+                  <td className="p-2">{item.name || "Nombre del Artículo"}</td>
                   <td className="p-2 text-right">{item.quantity || 0}</td>
                   <td className="p-2 text-right">
                     {formatCurrency(item.amount || 0)}
@@ -90,16 +90,16 @@ const Template5 = ({ data = {} }) => {
           <div className="flex justify-end mb-8">
             <div className="w-1/3">
               <p className="flex justify-between">
-                <span>Sub Total:</span> <span>{formatCurrency(subTotal)}</span>
+                <span>Subtotal:</span> <span>{formatCurrency(subTotal)}</span>
               </p>
               {taxPercentage > 0 && (
                 <p className="flex justify-between">
-                  <span>Tax ({taxPercentage}%):</span>{" "}
+                  <span>IVA ({taxPercentage}%):</span>{" "}
                   <span>{formatCurrency(taxAmount)}</span>
                 </p>
               )}
               <p className="flex justify-between font-bold text-lg mt-2">
-                <span>Total Due:</span>{" "}
+                <span>Total a Pagar:</span>{" "}
                 <span className="text-green-600">
                   {formatCurrency(grandTotal)}
                 </span>
@@ -111,14 +111,14 @@ const Template5 = ({ data = {} }) => {
           {notes && (
             <div className="p-4">
               <h3 className="text-lg font-semibold text-green-600 mb-2">
-                Additional Notes
+                Notas Adicionales
               </h3>
               <p>{notes}</p>
             </div>
           )}
         </div>
         <div className="p-4 text-center text-sm text-gray-600 bg-green-50">
-          This is a computer-generated invoice and doesn't require a signature.
+          Esta es una factura generada por computadora y no requiere firma.
         </div>
       </div>
     </BaseTemplate>

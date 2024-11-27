@@ -10,7 +10,7 @@ const Template1 = ({ data }) => {
       <div className="bg-white p-8 max-w-4xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <div className="text-right">
-            <h2 className="text-3xl font-semibold">INVOICE</h2>
+            <h2 className="text-3xl font-semibold">FACTURA</h2>
           </div>
         </div>
 
@@ -21,21 +21,21 @@ const Template1 = ({ data }) => {
             <p>{yourCompany.phone}</p>
           </div>
           <div>
-            <p>Invoice Number: {invoice.number}</p>
-            <p>Invoice Date: {invoice.date}</p>
-            <p>Due Date: {invoice.paymentDate}</p>
+            <p>Número de Factura: {invoice.number}</p>
+            <p>Fecha de Emisión: {invoice.date}</p>
+            <p>Fecha de Vencimiento: {invoice.paymentDate}</p>
           </div>
         </div>
 
         <div className="flex justify-between mb-8">
           <div>
-            <h3 className="font-semibold">Bill To:</h3>
+            <h3 className="font-semibold">Facturar a:</h3>
             <p>{billTo.name}</p>
             <p>{billTo.address}</p>
             <p>{billTo.phone}</p>
           </div>
           <div>
-            <h3 className="font-semibold">Ship To:</h3>
+            <h3 className="font-semibold">Enviar a:</h3>
             <p>{shipTo.name}</p>
             <p>{shipTo.address}</p>
             <p>{shipTo.phone}</p>
@@ -45,9 +45,9 @@ const Template1 = ({ data }) => {
         <table className="w-full mb-8">
           <thead>
             <tr className="border-t border-b bg-gray-100">
-              <th className="p-2 text-left">Item</th>
-              <th className="p-2 text-center">Quantity</th>
-              <th className="p-2 text-right">Unit Price</th>
+              <th className="p-2 text-left">Artículo</th>
+              <th className="p-2 text-center">Cantidad</th>
+              <th className="p-2 text-right">Precio Unitario</th>
               <th className="p-2 text-right">Total</th>
             </tr>
           </thead>
@@ -80,7 +80,7 @@ const Template1 = ({ data }) => {
             </div>
             {taxPercentage > 0 && (
               <div className="flex justify-between mb-2">
-                <span>Tax ({taxPercentage}%):</span>
+                <span>IVA ({taxPercentage}%):</span>
                 <span>{formatCurrency(taxAmount)}</span>
               </div>
             )}
@@ -92,7 +92,7 @@ const Template1 = ({ data }) => {
         </div>
 
         <div className="mt-8">
-          <h3 className="font-semibold mb-2">Notes:</h3>
+          <h3 className="font-semibold mb-2">Notas:</h3>
           <p>{notes}</p>
         </div>
       </div>

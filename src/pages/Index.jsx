@@ -9,27 +9,27 @@ import { RefreshCw } from "lucide-react";
 import { templates } from "../utils/templateRegistry";
 
 const noteOptions = [
-  "Thank you for choosing us today! We hope your shopping experience was pleasant and seamless. Your satisfaction matters to us, and we look forward to serving you again soon. Keep this receipt for any returns or exchanges.",
-  "Your purchase supports our community! We believe in giving back and working towards a better future. Thank you for being a part of our journey. We appreciate your trust and hope to see you again soon.",
-  "We value your feedback! Help us improve by sharing your thoughts on the text message survey link. Your opinions help us serve you better and improve your shopping experience. Thank you for shopping with us!",
-  "Did you know you can save more with our loyalty program? Ask about it on your next visit and earn points on every purchase. It’s our way of saying thank you for being a loyal customer. See you next time!",
-  "Need assistance with your purchase? We’re here to help! Reach out to our customer support, or visit our website for more information. We’re committed to providing you with the best service possible.",
-  "Keep this receipt for returns or exchanges.",
-  "Every purchase makes a difference! We are dedicated to eco-friendly practices and sustainability. Thank you for supporting a greener planet with us. Together, we can build a better tomorrow.",
-  "Have a great day!",
-  "“Thank you for shopping with us today. Did you know you can return or exchange your items within 30 days with this receipt? We want to ensure that you’re happy with your purchase, so don’t hesitate to come back if you need assistance.",
-  "Eco-friendly business. This receipt is recyclable.",
-  "We hope you enjoyed your shopping experience! Remember, for every friend you refer, you can earn exclusive rewards. Visit www.example.com/refer for more details. We look forward to welcoming you back soon!",
-  "Thank you for choosing us! We appreciate your business and look forward to serving you again. Keep this receipt for any future inquiries or returns.",
-  "Your purchase supports local businesses and helps us continue our mission. Thank you for being a valued customer. We hope to see you again soon!",
-  "We hope you had a great shopping experience today. If you have any feedback, please share it with us on our website. We are always here to assist you.",
-  "Thank you for your visit! Remember, we offer exclusive discounts to returning customers. Check your email for special offers on your next purchase.",
-  "Your satisfaction is our top priority. If you need any help or have questions about your purchase, don’t hesitate to contact us. Have a great day!",
-  "We love our customers! Thank you for supporting our business. Follow us on social media for updates on promotions and new products. See you next time!",
-  "Every purchase counts! We are committed to making a positive impact, and your support helps us achieve our goals. Thank you for shopping with us today!",
-  "We hope you found everything you needed. If not, please let us know so we can improve your experience. Your feedback helps us serve you better. Thank you!",
-  "Thank you for visiting! Did you know you can save more with our rewards program? Ask about it during your next visit and start earning points today!",
-  "We appreciate your trust in us. If you ever need assistance with your order, please visit our website or call customer service. We’re here to help!",
+  "¡Gracias por elegirnos hoy! Esperamos que su experiencia de compra haya sido agradable y sin problemas. Su satisfacción es importante para nosotros y esperamos atenderle nuevamente pronto. Conserve este recibo para cualquier devolución o cambio.",
+  "¡Su compra apoya a nuestra comunidad! Creemos en retribuir y trabajar por un futuro mejor. Gracias por ser parte de nuestro viaje. Apreciamos su confianza y esperamos verle pronto.",
+  "¡Valoramos sus comentarios! Ayúdenos a mejorar compartiendo su opinión en el enlace de la encuesta por mensaje de texto. Sus opiniones nos ayudan a servirle mejor y mejorar su experiencia de compra. ¡Gracias por comprar con nosotros!",
+  "¿Sabía que puede ahorrar más con nuestro programa de fidelización? Pregunte sobre él en su próxima visita y gane puntos en cada compra. Es nuestra forma de agradecerle por ser un cliente fiel. ¡Hasta la próxima!",
+  "¿Necesita ayuda con su compra? ¡Estamos aquí para ayudar! Contacte a nuestro servicio al cliente o visite nuestro sitio web para más información. Estamos comprometidos a brindarle el mejor servicio posible.",
+  "Conserve este recibo para devoluciones o cambios.",
+  "¡Cada compra hace la diferencia! Estamos dedicados a prácticas ecológicas y sostenibilidad. Gracias por apoyar un planeta más verde con nosotros. Juntos podemos construir un mejor mañana.",
+  "¡Que tenga un excelente día!",
+  "Gracias por comprar con nosotros hoy. ¿Sabía que puede devolver o cambiar sus artículos dentro de los 30 días con este recibo? Queremos asegurarnos de que esté satisfecho con su compra, así que no dude en volver si necesita ayuda.",
+  "Negocio ecológico. Este recibo es reciclable.",
+  "¡Esperamos que haya disfrutado su experiencia de compra! Recuerde, por cada amigo que refiera, puede ganar recompensas exclusivas. Visite www.example.com/refer para más detalles. ¡Esperamos darle la bienvenida nuevamente pronto!",
+  "¡Gracias por elegirnos! Apreciamos su preferencia y esperamos atenderle nuevamente. Conserve este recibo para cualquier consulta o devolución futura.",
+  "Su compra apoya a negocios locales y nos ayuda a continuar nuestra misión. ¡Gracias por ser un cliente valioso. Esperamos verle pronto!",
+  "Esperamos que haya tenido una excelente experiencia de compra hoy. Si tiene algún comentario, por favor compártalo con nosotros en nuestro sitio web. Siempre estamos aquí para ayudarle.",
+  "¡Gracias por su visita! Recuerde, ofrecemos descuentos exclusivos a clientes que regresan. Revise su correo electrónico para ofertas especiales en su próxima compra.",
+  "Su satisfacción es nuestra principal prioridad. Si necesita ayuda o tiene preguntas sobre su compra, no dude en contactarnos. ¡Que tenga un excelente día!",
+  "¡Amamos a nuestros clientes! Gracias por apoyar nuestro negocio. Síganos en redes sociales para actualizaciones sobre promociones y nuevos productos. ¡Hasta la próxima!",
+  "¡Cada compra cuenta! Estamos comprometidos a generar un impacto positivo, y su apoyo nos ayuda a alcanzar nuestros objetivos. ¡Gracias por comprar con nosotros hoy!",
+  "Esperamos que haya encontrado todo lo que necesitaba. Si no fue así, por favor háganoslo saber para mejorar su experiencia. Sus comentarios nos ayudan a servirle mejor. ¡Gracias!",
+  "¡Gracias por visitarnos! ¿Sabía que puede ahorrar más con nuestro programa de recompensas? ¡Pregunte sobre él durante su próxima visita y comience a ganar puntos hoy!",
+  "Apreciamos su confianza en nosotros. Si alguna vez necesita ayuda con su pedido, visite nuestro sitio web o llame a servicio al cliente. ¡Estamos aquí para ayudar!"
 ];
 
 const generateRandomInvoiceNumber = () => {
@@ -201,8 +201,8 @@ const Index = () => {
 
   const fillDummyData = () => {
     setBillTo({
-      name: "John Doe",
-      address: "123 Main St, Anytown, USA",
+      name: "Juan Pérez",
+      address: "Calle 123, Ciudad, País",
       phone: "(555) 123-4567",
     });
     setInvoice({
@@ -213,49 +213,49 @@ const Index = () => {
       number: generateRandomInvoiceNumber(),
     });
     setYourCompany({
-      name: "Your Company",
-      address: "789 Oak St, Businessville, USA",
+      name: "Su Compañía",
+      address: "Calle 789, Ciudad, País",
       phone: "(555) 555-5555",
     });
     setItems([
       {
-        name: "Product A",
-        description: "High-quality item",
+        name: "Producto A",
+        description: "Artículo de alta calidad",
         quantity: 2,
         amount: 50,
         total: 100,
       },
       {
-        name: "Service B",
-        description: "Professional service",
+        name: "Servicio B",
+        description: "Servicio profesional",
         quantity: 1,
         amount: 200,
         total: 200,
       },
       {
-        name: "Product C",
-        description: "Another great product",
+        name: "Producto C",
+        description: "Otro producto excelente",
         quantity: 3,
         amount: 30,
         total: 90,
       },
       {
-        name: "Service D",
-        description: "Another professional service",
+        name: "Servicio D",
+        description: "Otro servicio profesional",
         quantity: 2,
         amount: 150,
         total: 300,
       },
       {
-        name: "Product E",
-        description: "Yet another product",
+        name: "Producto E",
+        description: "Otro producto más",
         quantity: 1,
         amount: 75,
         total: 75,
       },
       {
-        name: "Service F",
-        description: "Yet another service",
+        name: "Servicio F",
+        description: "Otro servicio más",
         quantity: 4,
         amount: 100,
         total: 400,
@@ -263,7 +263,7 @@ const Index = () => {
     ]);
     settaxPercentage(10);
     calculateSubTotal();
-    setNotes("Thank you for your business!");
+    setNotes("¡Gracias por su compra!");
   };
 
   const clearForm = () => {
@@ -310,18 +310,18 @@ const Index = () => {
               handleInputChange={handleInputChange(setInvoice)}
             />
             <div className="mb-6">
-              <h2 className="text-2xl font-semibold mb-4">Your Company</h2>
+              <h2 className="text-2xl font-semibold mb-4">Su Compañía</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <FloatingLabelInput
                   id="yourCompanyName"
-                  label="Name"
+                  label="Nombre"
                   value={yourCompany.name}
                   onChange={handleInputChange(setYourCompany)}
                   name="name"
                 />
                 <FloatingLabelInput
                   id="yourCompanyPhone"
-                  label="Phone"
+                  label="Teléfono"
                   value={yourCompany.phone}
                   onChange={handleInputChange(setYourCompany)}
                   name="phone"
@@ -329,7 +329,7 @@ const Index = () => {
               </div>
               <FloatingLabelInput
                 id="yourCompanyAddress"
-                label="Address"
+                label="Dirección"
                 value={yourCompany.address}
                 onChange={handleInputChange(setYourCompany)}
                 name="address"
@@ -343,13 +343,13 @@ const Index = () => {
               removeItem={removeItem}
             />
             <div className="mb-6">
-              <h3 className="text-lg font-medium mb-2">Totals</h3>
+              <h3 className="text-lg font-medium mb-2">Totales</h3>
               <div className="flex justify-between mb-2">
-                <span>Sub Total:</span>
+                <span>Subtotal:</span>
                 <span>₹ {subTotal}</span>
               </div>
               <div className="flex justify-between mb-2">
-                <span>Tax Rate (%):</span>
+                <span>Tasa de impuesto (%):</span>
                 <input
                   type="number"
                   value={taxPercentage}
@@ -361,22 +361,22 @@ const Index = () => {
                 />
               </div>
               <div className="flex justify-between mb-2">
-                <span>Tax Amount:</span>
+                <span>Monto de impuesto:</span>
                 <span>₹ {taxAmount}</span>
               </div>
               <div className="flex justify-between font-bold">
-                <span>Grand Total:</span>
+                <span>Total:</span>
                 <span>₹ {grandTotal}</span>
               </div>
             </div>
             <div className="mb-6">
               <div className="flex items-center mb-2">
-                <h3 className="text-lg font-medium">Notes</h3>
+                <h3 className="text-lg font-medium">Notas</h3>
                 <button
                   type="button"
                   onClick={refreshNotes}
                   className="ml-2 p-1 rounded-full hover:bg-gray-200"
-                  title="Refresh Notes"
+                  title="Actualizar notas"
                 >
                   <RefreshCw size={16} />
                 </button>
@@ -391,7 +391,7 @@ const Index = () => {
           </form>
         </div>
         <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md overflow-y-auto">
-          <h2 className="text-2xl font-semibold mb-4">Template Gallery</h2>
+          <h2 className="text-2xl font-semibold mb-4">Galería de plantillas</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {templates.map((template, index) => (
               <div

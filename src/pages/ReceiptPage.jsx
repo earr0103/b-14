@@ -28,28 +28,29 @@ const generateRandomInvoiceNumber = () => {
 
   return result;
 };
+
 const footerOptions = [
-  "Thank you for choosing us today! We hope your shopping experience was pleasant and seamless. Your satisfaction matters to us, and we look forward to serving you again soon. Keep this receipt for any returns or exchanges.",
-  "Your purchase supports our community! We believe in giving back and working towards a better future. Thank you for being a part of our journey. We appreciate your trust and hope to see you again soon.",
-  "We value your feedback! Help us improve by sharing your thoughts on the text message survey link. Your opinions help us serve you better and improve your shopping experience. Thank you for shopping with us!",
-  "Did you know you can save more with our loyalty program? Ask about it on your next visit and earn points on every purchase. It’s our way of saying thank you for being a loyal customer. See you next time!",
-  "Need assistance with your purchase? We’re here to help! Reach out to our customer support, or visit our website for more information. We’re committed to providing you with the best service possible.",
-  "Keep this receipt for returns or exchanges.",
-  "Every purchase makes a difference! We are dedicated to eco-friendly practices and sustainability. Thank you for supporting a greener planet with us. Together, we can build a better tomorrow.",
-  "Have a great day!",
-  "“Thank you for shopping with us today. Did you know you can return or exchange your items within 30 days with this receipt? We want to ensure that you’re happy with your purchase, so don’t hesitate to come back if you need assistance.",
-  "Eco-friendly business. This receipt is recyclable.",
-  "We hope you enjoyed your shopping experience! Remember, for every friend you refer, you can earn exclusive rewards. Visit www.example.com/refer for more details. We look forward to welcoming you back soon!",
-  "Thank you for choosing us! We appreciate your business and look forward to serving you again. Keep this receipt for any future inquiries or returns.",
-  "Your purchase supports local businesses and helps us continue our mission. Thank you for being a valued customer. We hope to see you again soon!",
-  "We hope you had a great shopping experience today. If you have any feedback, please share it with us on our website. We are always here to assist you.",
-  "Thank you for your visit! Remember, we offer exclusive discounts to returning customers. Check your email for special offers on your next purchase.",
-  "Your satisfaction is our top priority. If you need any help or have questions about your purchase, don’t hesitate to contact us. Have a great day!",
-  "We love our customers! Thank you for supporting our business. Follow us on social media for updates on promotions and new products. See you next time!",
-  "Every purchase counts! We are committed to making a positive impact, and your support helps us achieve our goals. Thank you for shopping with us today!",
-  "We hope you found everything you needed. If not, please let us know so we can improve your experience. Your feedback helps us serve you better. Thank you!",
-  "Thank you for visiting! Did you know you can save more with our rewards program? Ask about it during your next visit and start earning points today!",
-  "We appreciate your trust in us. If you ever need assistance with your order, please visit our website or call customer service. We’re here to help!",
+  "¡Gracias por elegirnos hoy! Esperamos que su experiencia de compra haya sido agradable y sin problemas. Su satisfacción es importante para nosotros y esperamos atenderle nuevamente pronto. Conserve este recibo para cualquier devolución o cambio.",
+  "¡Su compra apoya a nuestra comunidad! Creemos en retribuir y trabajar por un futuro mejor. Gracias por ser parte de nuestro viaje. Apreciamos su confianza y esperamos verle pronto.",
+  "¡Valoramos sus comentarios! Ayúdenos a mejorar compartiendo su opinión en el enlace de la encuesta por mensaje de texto. Sus opiniones nos ayudan a servirle mejor y mejorar su experiencia de compra. ¡Gracias por comprar con nosotros!",
+  "¿Sabía que puede ahorrar más con nuestro programa de fidelización? Pregunte sobre él en su próxima visita y gane puntos en cada compra. Es nuestra forma de agradecerle por ser un cliente fiel. ¡Hasta la próxima!",
+  "¿Necesita ayuda con su compra? ¡Estamos aquí para ayudar! Contacte a nuestro servicio al cliente o visite nuestro sitio web para más información. Estamos comprometidos a brindarle el mejor servicio posible.",
+  "Conserve este recibo para devoluciones o cambios.",
+  "¡Cada compra hace la diferencia! Estamos dedicados a prácticas ecológicas y sostenibilidad. Gracias por apoyar un planeta más verde con nosotros. Juntos podemos construir un mejor mañana.",
+  "¡Que tenga un excelente día!",
+  "Gracias por comprar con nosotros hoy. ¿Sabía que puede devolver o cambiar sus artículos dentro de los 30 días con este recibo? Queremos asegurarnos de que esté satisfecho con su compra, así que no dude en volver si necesita ayuda.",
+  "Negocio ecológico. Este recibo es reciclable.",
+  "¡Esperamos que haya disfrutado su experiencia de compra! Recuerde, por cada amigo que refiera, puede ganar recompensas exclusivas. Visite www.example.com/refer para más detalles. ¡Esperamos darle la bienvenida nuevamente pronto!",
+  "¡Gracias por elegirnos! Apreciamos su preferencia y esperamos atenderle nuevamente. Conserve este recibo para cualquier consulta o devolución futura.",
+  "Su compra apoya a negocios locales y nos ayuda a continuar nuestra misión. ¡Gracias por ser un cliente valioso. Esperamos verle pronto!",
+  "Esperamos que haya tenido una excelente experiencia de compra hoy. Si tiene algún comentario, por favor compártalo con nosotros en nuestro sitio web. Siempre estamos aquí para ayudarle.",
+  "¡Gracias por su visita! Recuerde, ofrecemos descuentos exclusivos a clientes que regresan. Revise su correo electrónico para ofertas especiales en su próxima compra.",
+  "Su satisfacción es nuestra principal prioridad. Si necesita ayuda o tiene preguntas sobre su compra, no dude en contactarnos. ¡Que tenga un excelente día!",
+  "¡Amamos a nuestros clientes! Gracias por apoyar nuestro negocio. Síganos en redes sociales para actualizaciones sobre promociones y nuevos productos. ¡Hasta la próxima!",
+  "¡Cada compra cuenta! Estamos comprometidos a generar un impacto positivo, y su apoyo nos ayuda a alcanzar nuestros objetivos. ¡Gracias por comprar con nosotros hoy!",
+  "Esperamos que haya encontrado todo lo que necesitaba. Si no fue así, por favor háganoslo saber para mejorar su experiencia. Sus comentarios nos ayudan a servirle mejor. ¡Gracias!",
+  "¡Gracias por visitarnos! ¿Sabía que puede ahorrar más con nuestro programa de recompensas? ¡Pregunte sobre él durante su próxima visita y comience a ganar puntos hoy!",
+  "Apreciamos su confianza en nosotros. Si alguna vez necesita ayuda con su pedido, visite nuestro sitio web o llame a servicio al cliente. ¡Estamos aquí para ayudar!",
 ];
 
 const ReceiptPage = () => {
@@ -75,7 +76,7 @@ const ReceiptPage = () => {
   const [taxPercentage, setTaxPercentage] = useState(0);
   const [theme, setTheme] = useState("Receipt1");
   const [notes, setNotes] = useState("");
-  const [footer, setFooter] = useState("Thank you");
+  const [footer, setFooter] = useState("¡Gracias por elegirnos!");
 
   const refreshFooter = () => {
     const randomIndex = Math.floor(Math.random() * footerOptions.length);
@@ -164,7 +165,7 @@ const ReceiptPage = () => {
   return (
     <div className="container mx-auto px-4 py-8 relative">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">Receipt Generator</h1>
+        <h1 className="text-3xl font-bold">Generador de Recibos</h1>
         <div className="flex items-center">
           <Button
             onClick={handleDownloadPDF}
@@ -174,16 +175,16 @@ const ReceiptPage = () => {
             {isDownloading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Downloading...
+                Descargando...
               </>
             ) : (
-              "Download Receipt PDF"
+              "Descargar Recibo PDF"
             )}
           </Button>
           <button
             onClick={() => navigate("/")}
             className="bg-blue-500 text-white p-2 rounded-full shadow-lg hover:bg-blue-600"
-            aria-label="Switch to Bill Generator"
+            aria-label="Cambiar a Generador de Facturas"
           >
             <FileText size={24} />
           </button>
@@ -194,18 +195,18 @@ const ReceiptPage = () => {
         <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
           <form>
             <div className="mb-6">
-              <h2 className="text-2xl font-semibold mb-4">Your Company</h2>
+              <h2 className="text-2xl font-semibold mb-4">Su Compañía</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <FloatingLabelInput
                   id="yourCompanyName"
-                  label="Name"
+                  label="Nombre"
                   value={yourCompany.name}
                   onChange={handleInputChange(setYourCompany)}
                   name="name"
                 />
                 <FloatingLabelInput
                   id="yourCompanyPhone"
-                  label="Phone"
+                  label="Teléfono"
                   value={yourCompany.phone}
                   onChange={handleInputChange(setYourCompany)}
                   name="phone"
@@ -213,7 +214,7 @@ const ReceiptPage = () => {
               </div>
               <FloatingLabelInput
                 id="yourCompanyAddress"
-                label="Address"
+                label="Dirección"
                 value={yourCompany.address}
                 onChange={handleInputChange(setYourCompany)}
                 name="address"
@@ -222,7 +223,7 @@ const ReceiptPage = () => {
               <div className="relative mt-4">
                 <FloatingLabelInput
                   id="yourCompanyGST"
-                  label="GST No."
+                  label="Número de GST"
                   value={yourCompany.gst}
                   onChange={(e) => {
                     const value = e.target.value.slice(0, 15);
@@ -237,17 +238,17 @@ const ReceiptPage = () => {
                   type="button"
                   onClick={() => {
                     const newGST = generateGSTNumber();
-                    setYourCompany(prev => ({ ...prev, gst: newGST }));
+                    setYourCompany((prev) => ({ ...prev, gst: newGST }));
                   }}
                   className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 rounded-full hover:bg-gray-200"
-                  title="Generate new GST number"
+                  title="Generar nuevo número de GST"
                 >
                   <RotateCw size={16} />
                 </button>
               </div>
               <FloatingLabelInput
                 id="cashier"
-                label="Cashier"
+                label="Cajero"
                 value={cashier}
                 onChange={(e) => setCashier(e.target.value)}
                 name="cashier"
@@ -256,10 +257,10 @@ const ReceiptPage = () => {
             </div>
 
             <div className="mb-6">
-              <h2 className="text-2xl font-semibold mb-4">Bill To</h2>
+              <h2 className="text-2xl font-semibold mb-4">Factura a</h2>
               <FloatingLabelInput
                 id="billTo"
-                label="Bill To"
+                label="Factura a"
                 value={billTo}
                 onChange={(e) => setBillTo(e.target.value)}
                 name="billTo"
@@ -268,19 +269,19 @@ const ReceiptPage = () => {
 
             <div className="mb-6">
               <h2 className="text-2xl font-semibold mb-4">
-                Invoice Information
+                Información de la factura
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <FloatingLabelInput
                   id="invoiceNumber"
-                  label="Invoice Number"
+                  label="Número de factura"
                   value={invoice.number}
                   onChange={handleInputChange(setInvoice)}
                   name="number"
                 />
                 <FloatingLabelInput
                   id="invoiceDate"
-                  label="Invoice Date"
+                  label="Fecha de la factura"
                   type="date"
                   value={invoice.date}
                   onChange={handleInputChange(setInvoice)}
@@ -297,13 +298,13 @@ const ReceiptPage = () => {
             />
 
             <div className="mb-6">
-              <h3 className="text-lg font-medium mb-2">Totals</h3>
+              <h3 className="text-lg font-medium mb-2">Totales</h3>
               <div className="flex justify-between mb-2">
-                <span>Sub Total:</span>
+                <span>Subtotal:</span>
                 <span>₹ {calculateSubTotal()}</span>
               </div>
               <div className="flex justify-between mb-2">
-                <span>Tax (%):</span>
+                <span>Impuesto (%):</span>
                 <input
                   type="number"
                   value={taxPercentage}
@@ -317,17 +318,17 @@ const ReceiptPage = () => {
                 />
               </div>
               <div className="flex justify-between mb-2">
-                <span>Tax Amount:</span>
+                <span>Monto del impuesto:</span>
                 <span>₹ {calculateTaxAmount()}</span>
               </div>
               <div className="flex justify-between font-bold">
-                <span>Grand Total:</span>
+                <span>Total:</span>
                 <span>₹ {calculateGrandTotal()}</span>
               </div>
             </div>
 
             <div className="mb-6">
-              <h3 className="text-lg font-medium mb-2">Notes</h3>
+              <h3 className="text-lg font-medium mb-2">Notas</h3>
               <textarea
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
@@ -337,12 +338,12 @@ const ReceiptPage = () => {
             </div>
             <div className="mb-6">
               <div className="flex items-center mb-2">
-                <h3 className="text-lg font-medium">Footer</h3>
+                <h3 className="text-lg font-medium">Pie de página</h3>
                 <button
                   type="button"
                   onClick={refreshFooter}
                   className="ml-2 p-1 rounded-full hover:bg-gray-200"
-                  title="Refresh footer"
+                  title="Actualizar pie de página"
                 >
                   <RefreshCw size={16} />
                 </button>
@@ -358,9 +359,9 @@ const ReceiptPage = () => {
         </div>
 
         <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-2xl font-semibold mb-4">Receipt Preview</h2>
+          <h2 className="text-2xl font-semibold mb-4">Vista previa del recibo</h2>
           <div className="mb-4 flex items-center">
-            <h3 className="text-lg font-medium mr-4">Receipt Type</h3>
+            <h3 className="text-lg font-medium mr-4">Tipo de recibo</h3>
             <div className="flex gap-4">
               <label className="flex items-center">
                 <input
@@ -371,7 +372,7 @@ const ReceiptPage = () => {
                   onChange={() => setTheme("Receipt1")}
                   className="mr-2"
                 />
-                Receipt1
+                Recibo 1
               </label>
               <label className="flex items-center">
                 <input
@@ -382,7 +383,7 @@ const ReceiptPage = () => {
                   onChange={() => setTheme("Receipt2")}
                   className="mr-2"
                 />
-                Receipt2
+                Recibo 2
               </label>
               <label className="flex items-center">
                 <input
@@ -393,7 +394,7 @@ const ReceiptPage = () => {
                   onChange={() => setTheme("Receipt3")}
                   className="mr-2"
                 />
-                Receipt3
+                Recibo 3
               </label>
               <label className="flex items-center">
                 <input
@@ -404,7 +405,7 @@ const ReceiptPage = () => {
                   onChange={() => setTheme("Receipt4")}
                   className="mr-2"
                 />
-                Receipt4
+                Recibo 4
               </label>
             </div>
           </div>

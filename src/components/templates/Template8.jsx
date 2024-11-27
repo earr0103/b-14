@@ -12,23 +12,23 @@ const Template8 = ({ data }) => {
         style={{ margin: "0", padding: "16px" }}
       >
         <div className="grid grid-cols-2 gap-8 mb-8">
-          <div>
-            <h3 className="text-lg font-semibold mb-2">Billed to</h3>
-            <p className="font-bold">{billTo.name}</p>
-            <p>{billTo.address}</p>
-            <p>{billTo.phone}</p>
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold mb-2">Facturado a:</h3>
+            <p>{billTo.name || "Nombre del Cliente"}</p>
+            <p>{billTo.address || "Dirección del Cliente"}</p>
+            <p><span className="font-semibold">RUC:</span> {billTo.ruc || "N/A"}</p>
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-2">Invoice Details</h3>
+            <h3 className="text-lg font-semibold mb-2">Detalles de la Factura</h3>
             <p>
-              <span className="font-semibold">Invoice #:</span> {invoice.number}
+              <span className="font-semibold">Factura #:</span> {invoice.number}
             </p>
             <p>
-              <span className="font-semibold">Invoice Date:</span>{" "}
+              <span className="font-semibold">Fecha de Emisión:</span>{" "}
               {invoice.date}
             </p>
             <p>
-              <span className="font-semibold">Due Date:</span>{" "}
+              <span className="font-semibold">Fecha de Vencimiento:</span>{" "}
               {invoice.paymentDate}
             </p>
           </div>
@@ -37,10 +37,10 @@ const Template8 = ({ data }) => {
         <table className="w-full mb-8">
           <thead style={{ backgroundColor: "#3C8BF6", color: "white" }}>
             <tr>
-              <th className="p-2 text-left">Item</th>
-              <th className="p-2 text-right">Quantity</th>
-              <th className="p-2 text-right">Rate</th>
-              <th className="p-2 text-right">Amount</th>
+              <th className="p-2 text-left">Artículo</th>
+              <th className="p-2 text-right">Cantidad</th>
+              <th className="p-2 text-right">Precio</th>
+              <th className="p-2 text-right">Monto</th>
             </tr>
           </thead>
           <tbody>
@@ -65,17 +65,17 @@ const Template8 = ({ data }) => {
         <div className="flex justify-end mb-8">
           <div className="w-1/2">
             <div className="flex justify-between mb-2">
-              <span>Sub Total:</span>
+              <span>Subtotal:</span>
               <span>{formatCurrency(subTotal)}</span>
             </div>
             {taxPercentage > 0 && (
               <div className="flex justify-between mb-2">
-                <span>Tax ({taxPercentage}%):</span>
+                <span>IVA ({taxPercentage}%):</span>
                 <span>{formatCurrency(taxAmount)}</span>
               </div>
             )}
             <div className="flex justify-between font-bold text-lg mt-2">
-              <span>Total Due:</span>
+              <span>Total a Pagar:</span>
               <span style={{ color: "#3C8BF6" }}>
                 {formatCurrency(grandTotal)}
               </span>
@@ -85,14 +85,14 @@ const Template8 = ({ data }) => {
 
         {notes && (
           <div className="mt-8 border-t pt-4">
-            <h3 className="text-lg font-semibold mb-2">Notes:</h3>
+            <h3 className="text-lg font-semibold mb-2">Notas:</h3>
             <p>{notes}</p>
           </div>
         )}
         <footer className="mt-auto">
           <div className="flex justify-between items-center">
             <h1 className="text-4xl font-bold" style={{ color: "#3C8BF6" }}>
-              Invoice
+              Factura
             </h1>
             <div className="text-right">
               <h2 className="text-xl font-bold">{yourCompany.name}</h2>

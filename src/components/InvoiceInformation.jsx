@@ -4,18 +4,18 @@ import FloatingLabelInput from './FloatingLabelInput';
 const InvoiceInformation = ({ invoice, handleInputChange }) => {
   return (
     <div className="mb-6">
-      <h2 className="text-2xl font-semibold mb-4">Invoice Information</h2>
+      <h2 className="text-2xl font-semibold mb-4">Información de Factura</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <FloatingLabelInput
           id="invoiceNumber"
-          label="Invoice Number"
+          label="Número de Factura"
           value={invoice.number}
           onChange={handleInputChange}
           name="number"
         />
         <FloatingLabelInput
           id="invoiceDate"
-          label="Invoice Date"
+          label="Fecha de Factura"
           type="date"
           value={invoice.date}
           onChange={handleInputChange}
@@ -23,7 +23,7 @@ const InvoiceInformation = ({ invoice, handleInputChange }) => {
         />
         <FloatingLabelInput
           id="paymentDate"
-          label="Payment Date"
+          label="Fecha de Pago"
           type="date"
           value={invoice.paymentDate}
           onChange={handleInputChange}

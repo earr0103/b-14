@@ -12,25 +12,25 @@ const Template6 = ({ data }) => {
         <div className="flex justify-between items-start mb-8">
           <div>
             <h2 className="text-2xl font-bold" style={{ color: "#14A8DE" }}>
-              {yourCompany.name || "Company Name"}
+              {yourCompany.name || "Nombre de la Empresa"}
             </h2>
-            <p>{yourCompany.address || "Company Address"}</p>
-            <p>{yourCompany.phone || "Company Phone"}</p>
+            <p>{yourCompany.address || "Dirección de la Empresa"}</p>
+            <p>{yourCompany.phone || "Teléfono de la Empresa"}</p>
           </div>
           <div className="text-right">
-            <h1 className="text-3xl font-thin mb-4">Tax Invoice</h1>
+            <h1 className="text-3xl font-thin mb-4">Factura Tributaria</h1>
             <p>
-              <span className="font-semibold">Invoice No:</span>{" "}
+              <span className="font-semibold">N° de Factura:</span>{" "}
               {invoice.number || "N/A"}
             </p>
             <p>
-              <span className="font-semibold">Invoice Date:</span>{" "}
+              <span className="font-semibold">Fecha de Emisión:</span>{" "}
               {invoice.date
                 ? format(new Date(invoice.date), "MMM dd, yyyy")
                 : "N/A"}
             </p>
             <p>
-              <span className="font-semibold">Due Date:</span>{" "}
+              <span className="font-semibold">Fecha de Vencimiento:</span>{" "}
               {invoice.paymentDate
                 ? format(new Date(invoice.paymentDate), "MMM dd, yyyy")
                 : "N/A"}
@@ -40,9 +40,9 @@ const Template6 = ({ data }) => {
 
         <div className="grid grid-cols-2 gap-8 mb-8">
           <div>
-            <h3 className="text-lg font-semibold mb-2">Billed to</h3>
-            <p>{billTo.name || "Client Name"}</p>
-            <p>{billTo.address || "Client Address"}</p>
+            <h3 className="text-lg font-semibold mb-2">Facturado a</h3>
+            <p>{billTo.name || "Nombre del Cliente"}</p>
+            <p>{billTo.address || "Dirección del Cliente"}</p>
           </div>
         </div>
 
@@ -50,16 +50,16 @@ const Template6 = ({ data }) => {
           <thead style={{ backgroundColor: "#14A8DE" }}>
             <tr>
               <th className="p-2 text-left border-b border-gray-300 text-white">
-                Item #/Item description
+                Artículo #/Descripción
               </th>
               <th className="p-2 text-right border-b border-gray-300 text-white">
-                Quantity
+                Cantidad
               </th>
               <th className="p-2 text-right border-b border-gray-300 text-white">
-                Rate
+                Precio
               </th>
               <th className="p-2 text-right border-b border-gray-300 text-white">
-                Amount
+                Monto
               </th>
             </tr>
           </thead>
@@ -67,9 +67,9 @@ const Template6 = ({ data }) => {
             {items.map((item, index) => (
               <tr key={index}>
                 <td className="p-2 border border-gray-300">
-                  <p className="font-semibold">{item.name || "Item Name"}</p>
+                  <p className="font-semibold">{item.name || "Nombre del Artículo"}</p>
                   <p className="text-sm text-gray-600">
-                    {item.description || "Item Description"}
+                    {item.description || "Descripción del Artículo"}
                   </p>
                 </td>
                 <td className="p-2 text-right border border-gray-300">
@@ -91,7 +91,7 @@ const Template6 = ({ data }) => {
             <tbody>
               <tr>
                 <td className="p-2 text-right font-semibold border border-gray-300">
-                  Sub Total
+                  Subtotal
                 </td>
                 <td className="p-2 text-right border border-gray-300">
                   {formatCurrency(subTotal)}
@@ -100,7 +100,7 @@ const Template6 = ({ data }) => {
               {taxPercentage > 0 && (
                 <tr>
                   <td className="p-2 text-right font-semibold border border-gray-300">
-                    Tax ({taxPercentage}%)
+                    IVA ({taxPercentage}%)
                   </td>
                   <td className="p-2 text-right border border-gray-300">
                     {formatCurrency(taxAmount)}
@@ -109,7 +109,7 @@ const Template6 = ({ data }) => {
               )}
               <tr className="text-white" style={{ backgroundColor: "#14A8DE" }}>
                 <td className="p-2 text-right font-semibold border border-gray-300">
-                  Total Due Amount
+                  Total a Pagar
                 </td>
                 <td className="p-2 text-right border border-gray-300">
                   {formatCurrency(grandTotal)}

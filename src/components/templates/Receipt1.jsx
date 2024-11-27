@@ -29,30 +29,30 @@ const Receipt1 = ({ data, isPrint = false }) => {
         }}
       >
         <div className="flex-grow">
-          <div className="text-center font-bold mb-2">RECEIPT</div>
+          <div className="text-center font-bold mb-2">RECIBO</div>
           <div className="mb-2 text-center">
             <div>{yourCompany.name || "N/A"}</div>
             <div>{yourCompany.address || "N/A"}</div>
             {yourCompany.phone && <div>{yourCompany.phone}</div>}
           </div>
-            <div>Invoice: {invoice.number || "N/A"}</div>
+            <div>Factura: {invoice.number || "N/A"}</div>
             <div>
-              Date:{" "}
+              Fecha:{" "}
               {invoice.date
                 ? `${format(new Date(invoice.date), "MM/dd/yyyy")} ${format(new Date(), "HH:mm")}`
                 : "N/A"}
             </div>
-          <div className="mb-2">Customer: {billTo || "N/A"}</div>
-          <div className="mb-2">Cashier: {cashier || "N/A"}</div>
+          <div className="mb-2">Cliente: {billTo || "N/A"}</div>
+          <div className="mb-2">Cajero: {cashier || "N/A"}</div>
           <div className="border-t border-b py-2 mb-2">
             <div className="flex justify-between font-bold mb-2">
-              <span>Item</span>
+              <span>Artículo</span>
               <span>Total</span>
             </div>
             {items.map((item, index) => (
               <div key={index} className="flex justify-between mb-2">
                 <div>
-                  <span>{item.name || "N/A"} X {item.quantity || 0} qty</span>
+                  <span>{item.name || "N/A"} X {item.quantity || 0} unid</span>
                 </div>
                 <span>
                   {formatCurrency((item.quantity || 0) * (item.amount || 0))}
@@ -66,7 +66,7 @@ const Receipt1 = ({ data, isPrint = false }) => {
           </div>
           {taxPercentage > 0 && (
             <div className="flex justify-between">
-              <span>Tax ({taxPercentage}%):</span>
+              <span>IVA ({taxPercentage}%):</span>
               <span>{formatCurrency(taxAmount)}</span>
             </div>
           )}

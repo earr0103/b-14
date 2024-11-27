@@ -17,22 +17,22 @@ const Template2 = ({ data }) => {
             <p>{yourCompany.phone}</p>
           </div>
           <div className="text-right">
-            <h2 className="text-xl font-semibold text-cyan-700">Tax invoice</h2>
-            <p>INVOICE NUMBER: {invoice.number}</p>
-            <p>DATE: {invoice.date}</p>
-            <p>DUE DATE: {invoice.paymentDate}</p>
+            <h2 className="text-xl font-semibold text-cyan-700">Factura Tributaria</h2>
+            <p>NÚMERO DE FACTURA: {invoice.number}</p>
+            <p>FECHA: {invoice.date}</p>
+            <p>FECHA DE VENCIMIENTO: {invoice.paymentDate}</p>
           </div>
         </div>
 
         <div className="flex justify-between mb-8">
           <div>
-            <h3 className="font-semibold text-lg mb-2 text-cyan-700">Bill To</h3>
+            <h3 className="font-semibold text-lg mb-2 text-cyan-700">Facturar A</h3>
             <p>{billTo.name}</p>
             <p>{billTo.address}</p>
             <p>{billTo.phone}</p>
           </div>
           <div>
-            <h3 className="font-semibold text-lg mb-2 text-cyan-700">Ship To</h3>
+            <h3 className="font-semibold text-lg mb-2 text-cyan-700">Enviar A</h3>
             <p>{shipTo.name}</p>
             <p>{shipTo.address}</p>
             <p>{shipTo.phone}</p>
@@ -45,14 +45,14 @@ const Template2 = ({ data }) => {
               <tr>
                 <th className="p-2 text-left border border-gray-300">ID</th>
                 <th className="p-2 text-left border border-gray-300">
-                  Description
+                  Descripción
                 </th>
                 <th className="p-2 text-right border border-gray-300">
-                  Quantity
+                  Cantidad
                 </th>
-                <th className="p-2 text-right border border-gray-300">Rate</th>
+                <th className="p-2 text-right border border-gray-300">Precio</th>
                 <th className="p-2 text-right border border-gray-300">
-                  Amount
+                  Monto
                 </th>
               </tr>
             </thead>
@@ -89,7 +89,7 @@ const Template2 = ({ data }) => {
             </div>
             {taxPercentage > 0 && (
               <div className="flex justify-between mb-2">
-                <span>Tax ({taxPercentage}%):</span>
+                <span>IVA ({taxPercentage}%):</span>
                 <span>{formatCurrency(taxAmount)}</span>
               </div>
             )}
@@ -102,7 +102,7 @@ const Template2 = ({ data }) => {
 
         {notes && (
           <div className="mt-8 text-sm">
-            <h3 className="font-semibold mb-2">Notes:</h3>
+            <h3 className="font-semibold mb-2">Notas:</h3>
             <p>{notes}</p>
           </div>
         )}

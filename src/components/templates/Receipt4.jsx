@@ -8,31 +8,31 @@ const Receipt4 = ({ data }) => {
     <div className="p-4 font-['Courier_New',_monospace]">
       <h2 className="text-center font-bold">{yourCompany.name}</h2>
       <p className="text-center">{yourCompany.address}</p>
-      <p className="text-center">Phone Number: {yourCompany.phone}</p>
+      <p className="text-center">Teléfono: {yourCompany.phone}</p>
       {yourCompany.gst && (
-        <p className="text-center">GST No: {yourCompany.gst.toUpperCase()}</p>
+        <p className="text-center">RUC No: {yourCompany.gst.toUpperCase()}</p>
       )}
       <hr className="my-4" />
       <div>
-        <p>Invoice Number: {invoice.number}</p>
-        <p>Created By: {data.cashier}</p>
+        <p>Número de Factura: {invoice.number}</p>
+        <p>Creado Por: {data.cashier}</p>
         <p>
-          Date & Time: {invoice.date} {currentTime}
+          Fecha y Hora: {invoice.date} {currentTime}
         </p>
       </div>
       <hr className="my-4" />
       <div>
-        <h3>Bill to:</h3>
+        <h3>Facturar a:</h3>
         <p>{billTo}</p>
-        <span>Place of supply: Chhattisgarh-22</span>
+        <span>Lugar de suministro: Asunción-Capital</span>
       </div>
       <hr className="my-4" />
       <table className="w-full">
         <thead>
           <tr>
-            <th className="text-left">Item</th>
-            <th className="text-right">Qty</th>
-            <th className="text-right">Price</th>
+            <th className="text-left">Artículo</th>
+            <th className="text-right">Cant</th>
+            <th className="text-right">Precio</th>
           </tr>
         </thead>
         <tbody>
@@ -45,7 +45,7 @@ const Receipt4 = ({ data }) => {
               </tr>
               <tr className="align-top">
                 <td colSpan="2" className="text-left text-sm pb-2">
-                  HSN Code: {item.description}
+                  Código: {item.description}
                 </td>
                 <td className="text-right pb-2">Total: {item.total}</td>
               </tr>
@@ -55,15 +55,15 @@ const Receipt4 = ({ data }) => {
       </table>
       <hr className="my-4" />
       <div className="flex justify-between">
-        <span>Sub Total:</span>
+        <span>Subtotal:</span>
         <span>
-          INR {items.reduce((sum, item) => sum + item.total, 0).toFixed(2)}
+          ₲ {items.reduce((sum, item) => sum + item.total, 0).toFixed(2)}
         </span>
       </div>
       <div className="flex justify-between">
-        <span>Tax ({taxPercentage}%):</span>
+        <span>IVA ({taxPercentage}%):</span>
         <span>
-          INR{" "}
+          ₲{" "}
           {(
             items.reduce((sum, item) => sum + item.total, 0) *
             (taxPercentage / 100)
@@ -73,7 +73,7 @@ const Receipt4 = ({ data }) => {
       <div className="flex justify-between font-bold">
         <span>TOTAL:</span>
         <span>
-          INR{" "}
+          ₲{" "}
           {(
             items.reduce((sum, item) => sum + item.total, 0) *
             (1 + taxPercentage / 100)
@@ -82,40 +82,27 @@ const Receipt4 = ({ data }) => {
       </div>
       <hr className="my-4" />
       <div>
-        <h3 className="mb-2">Tax Summary</h3>
+        <h3 className="mb-2">Resumen de Impuestos</h3>
         <table className="w-full">
           <thead>
             <tr>
-              <th className="text-left font-normal">Type</th>
-              <th className="text-right font-normal">Rate</th>
-              <th className="text-right font-normal">Total Amt</th>
-              <th className="text-right font-normal">Tax Amt</th>
+              <th className="text-left font-normal">Tipo</th>
+              <th className="text-right font-normal">Tasa</th>
+              <th className="text-right font-normal">Monto Total</th>
+              <th className="text-right font-normal">Monto IVA</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>CGST</td>
-              <td className="text-right">{(taxPercentage / 2).toFixed(2)}%</td>
+              <td>IVA</td>
+              <td className="text-right">{taxPercentage.toFixed(2)}%</td>
               <td className="text-right">
                 {items.reduce((sum, item) => sum + item.total, 0).toFixed(2)}
               </td>
               <td className="text-right">
                 {(
                   items.reduce((sum, item) => sum + item.total, 0) *
-                  (taxPercentage / 200)
-                ).toFixed(2)}
-              </td>
-            </tr>
-            <tr>
-              <td>SGST</td>
-              <td className="text-right">{(taxPercentage / 2).toFixed(2)}%</td>
-              <td className="text-right">
-                {items.reduce((sum, item) => sum + item.total, 0).toFixed(2)}
-              </td>
-              <td className="text-right">
-                {(
-                  items.reduce((sum, item) => sum + item.total, 0) *
-                  (taxPercentage / 200)
+                  (taxPercentage / 100)
                 ).toFixed(2)}
               </td>
             </tr>
