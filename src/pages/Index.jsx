@@ -346,7 +346,7 @@ const Index = () => {
               <h3 className="text-lg font-medium mb-2">Totales</h3>
               <div className="flex justify-between mb-2">
                 <span>Subtotal:</span>
-                <span>₹ {subTotal}</span>
+                <span>₲ {subTotal}</span>
               </div>
               <div className="flex justify-between mb-2">
                 <span>Tasa de impuesto (%):</span>
@@ -362,11 +362,11 @@ const Index = () => {
               </div>
               <div className="flex justify-between mb-2">
                 <span>Monto de impuesto:</span>
-                <span>₹ {taxAmount}</span>
+                <span>₲ {taxAmount}</span>
               </div>
               <div className="flex justify-between font-bold">
                 <span>Total:</span>
-                <span>₹ {grandTotal}</span>
+                <span>₲ {grandTotal}</span>
               </div>
             </div>
             <div className="mb-6">
