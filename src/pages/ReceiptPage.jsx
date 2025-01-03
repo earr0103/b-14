@@ -301,7 +301,7 @@ const ReceiptPage = () => {
               <h3 className="text-lg font-medium mb-2">Totales</h3>
               <div className="flex justify-between mb-2">
                 <span>Subtotal:</span>
-                <span>₹ {calculateSubTotal()}</span>
+                <span>₲ {calculateSubTotal()}</span>
               </div>
               <div className="flex justify-between mb-2">
                 <span>Impuesto (%):</span>
@@ -319,11 +319,11 @@ const ReceiptPage = () => {
               </div>
               <div className="flex justify-between mb-2">
                 <span>Monto del impuesto:</span>
-                <span>₹ {calculateTaxAmount()}</span>
+                <span>₲ {calculateTaxAmount()}</span>
               </div>
               <div className="flex justify-between font-bold">
                 <span>Total:</span>
-                <span>₹ {calculateGrandTotal()}</span>
+                <span>₲ {calculateGrandTotal()}</span>
               </div>
             </div>
 
