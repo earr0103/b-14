@@ -9,15 +9,15 @@ import Template8 from '../components/templates/Template8';
 import Template9 from '../components/templates/Template9';
 
 export const templates = [
-  { name: 'Template 1', component: Template1 },
-  { name: 'Template 2', component: Template2 },
-  { name: 'Template 3', component: Template3 },
-  { name: 'Template 4', component: Template4 },
-  { name: 'Template 5', component: Template5 },
-  { name: 'Template 6', component: Template6 },
-  { name: 'Template 7', component: Template7 },
-  { name: 'Template 8', component: Template8 },
-  { name: 'Template 9', component: Template9 },
+  { name: 'Plantilla 1', component: Template1 },
+  { name: 'Plantilla 2', component: Template2 },
+  { name: 'Plantilla 3', component: Template3 },
+  { name: 'Plantilla 4', component: Template4 },
+  { name: 'Plantilla 5', component: Template5 },
+  { name: 'Plantilla 6', component: Template6 },
+  { name: 'Plantilla 7', component: Template7 },
+  { name: 'Plantilla 8', component: Template8 },
+  { name: 'Plantilla 9', component: Template9 },
 ];
 
 export const getTemplate = (templateNumber) => {
