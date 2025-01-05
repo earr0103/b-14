@@ -30,7 +30,16 @@ document.addEventListener('alpine:init', () => {
     },
 
     addItem() {
-      this.items.push({ sno: this.items.length + 1, name: '', description: '', quantity: 0, amount: 0, total: 0 });
+      this.items.push({ 
+        sno: this.items.length + 1, 
+        name: '', 
+        description: '', 
+        quantity: 0, 
+        amount: 0, 
+        total: 0,
+        hasDiscount: false,
+        discountPercentage: 0 
+      });
     },
 
     calculateSubTotal() {
@@ -81,7 +90,16 @@ document.addEventListener('alpine:init', () => {
         this.billTo = { name: '', address: '', phone: '' };
         this.invoice = { date: '', paymentDate: '' };
         this.from = { name: '', address: '', phone: '' };
-        this.items = [{ sno: 1, name: '', description: '', quantity: 0, amount: 0, total: 0 }];
+        this.items = [{ 
+          sno: 1, 
+          name: '', 
+          description: '', 
+          quantity: 0, 
+          amount: 0, 
+          total: 0,
+          hasDiscount: false,
+          discountPercentage: 0 
+        }];
         this.tax = 0;
         this.notes = '';
       }

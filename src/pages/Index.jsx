@@ -152,7 +152,14 @@ const Index = () => {
   };
 
   const calculateSubTotal = () => {
-    const calculatedSubTotal = items.reduce((sum, item) => sum + (item.quantity * item.amount), 0);
+    const calculatedSubTotal = items.reduce((sum, item) => {
+      const baseTotal = item.quantity * item.amount;
+      if (item.hasDiscount && item.discountPercentage) {
+        const discount = (baseTotal * item.discountPercentage) / 100;
+        return sum + (baseTotal - discount);
+      }
+      return sum + baseTotal;
+    }, 0);
     setSubTotal(calculatedSubTotal.toFixed(2));
     return calculatedSubTotal;
   };
