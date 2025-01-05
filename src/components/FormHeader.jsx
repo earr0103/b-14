@@ -5,7 +5,7 @@ const FormHeader = ({ onClear, onFillDummy, onNavigateToReceipt }) => {
   return (
     <>
       <h1 className="text-3xl font-bold mb-8 text-center">Generador de Facturas</h1>
-      <div className="fixed top-4 left-4 flex gap-2">
+      <div className="fixed top-4 left-4 z-50 flex gap-2">
         <button
           onClick={onClear}
           className="bg-red-500 text-white p-2 rounded-full shadow-lg hover:bg-red-600"
@@ -23,7 +23,7 @@ const FormHeader = ({ onClear, onFillDummy, onNavigateToReceipt }) => {
       </div>
       <button
         onClick={onNavigateToReceipt}
-        className="fixed top-4 right-4 bg-green-500 text-white p-2 rounded-full shadow-lg hover:bg-green-600"
+        className="fixed top-4 right-4 z-50 bg-green-500 text-white p-2 rounded-full shadow-lg hover:bg-green-600"
         aria-label="Cambiar a Recibo"
       >
         <FiFileText size={24} />
