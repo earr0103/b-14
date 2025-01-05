@@ -2,7 +2,7 @@ document.addEventListener('alpine:init', () => {
   Alpine.data('billGenerator', () => ({
     billTo: { name: '', address: '', phone: '' },
     invoice: { date: '', paymentDate: '' },
-    from: { name: '', address: '', phone: '' },
+    from: { name: '', address: '', phone: '', ruc: '', timbrado: '' },
     items: [{ sno: 1, name: '', description: '', quantity: 0, amount: 0, total: 0 }],
     tax: 0,
     notes: '',

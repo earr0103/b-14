@@ -3,7 +3,7 @@ import BaseTemplate from './BaseTemplate';
 import { formatCurrency } from '../../utils/formatCurrency';
 
 const Template1 = ({ data }) => {
-  const { billTo, shipTo, invoice, yourCompany, items, taxPercentage, taxAmount, subTotal, grandTotal, notes } = data;
+  const { billTo, invoice, yourCompany, items, taxPercentage, taxAmount, subTotal, grandTotal, notes } = data;
 
   return (
     <BaseTemplate data={data}>
@@ -19,6 +19,8 @@ const Template1 = ({ data }) => {
             <h1 className="text-2xl font-bold">{yourCompany.name}</h1>
             <p>{yourCompany.address}</p>
             <p>{yourCompany.phone}</p>
+            <p>RUC: {yourCompany.ruc}</p>
+            <p>Timbrado: {yourCompany.timbrado}</p>
           </div>
           <div>
             <p>Número de Factura: {invoice.number}</p>
@@ -33,12 +35,6 @@ const Template1 = ({ data }) => {
             <p>{billTo.name}</p>
             <p>{billTo.address}</p>
             <p>{billTo.phone}</p>
-          </div>
-          <div>
-            <h3 className="font-semibold">Enviar a:</h3>
-            <p>{shipTo.name}</p>
-            <p>{shipTo.address}</p>
-            <p>{shipTo.phone}</p>
           </div>
         </div>
 

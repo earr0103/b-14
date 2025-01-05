@@ -62,6 +62,8 @@ const Index = () => {
     name: "",
     address: "",
     phone: "",
+    ruc: "",
+    timbrado: "",
   });
   const [items, setItems] = useState([]);
   const [taxPercentage, settaxPercentage] = useState(0);
@@ -84,7 +86,7 @@ const Index = () => {
         parsedData.invoice || { date: "", paymentDate: "", number: "" }
       );
       setYourCompany(
-        parsedData.yourCompany || { name: "", address: "", phone: "" }
+        parsedData.yourCompany || { name: "", address: "", phone: "", ruc: "", timbrado: "" }
       );
       setItems(parsedData.items || []);
       settaxPercentage(parsedData.taxPercentage || 0);
@@ -216,6 +218,8 @@ const Index = () => {
       name: "Su Compañía",
       address: "Calle 789, Ciudad, País",
       phone: "(555) 555-5555",
+      ruc: "80012345-6",
+      timbrado: "12345678",
     });
     setItems([
       {
@@ -273,7 +277,7 @@ const Index = () => {
       paymentDate: "",
       number: generateRandomInvoiceNumber(),
     });
-    setYourCompany({ name: "", address: "", phone: "" });
+    setYourCompany({ name: "", address: "", phone: "", ruc: "", timbrado: "" });
     setItems([{ name: "", description: "", quantity: 0, amount: 0, total: 0 }]);
     settaxPercentage(0);
     setNotes("");
@@ -325,6 +329,20 @@ const Index = () => {
                   value={yourCompany.phone}
                   onChange={handleInputChange(setYourCompany)}
                   name="phone"
+                />
+                <FloatingLabelInput
+                  id="yourCompanyRuc"
+                  label="RUC"
+                  value={yourCompany.ruc}
+                  onChange={handleInputChange(setYourCompany)}
+                  name="ruc"
+                />
+                <FloatingLabelInput
+                  id="yourCompanyTimbrado"
+                  label="Timbrado"
+                  value={yourCompany.timbrado}
+                  onChange={handleInputChange(setYourCompany)}
+                  name="timbrado"
                 />
               </div>
               <FloatingLabelInput
