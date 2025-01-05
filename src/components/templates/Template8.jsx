@@ -55,7 +55,14 @@ const Template8 = ({ data }) => {
                   {formatCurrency(item.amount)}
                 </td>
                 <td className="p-2 text-right">
-                  {formatCurrency(item.quantity * item.amount)}
+                  {formatCurrency(item.hasDiscount && item.discountPercentage ? 
+                    (item.quantity * item.amount * (1 - item.discountPercentage / 100)) : 
+                    (item.quantity * item.amount))}
+                  {item.hasDiscount && item.discountPercentage > 0 && (
+                    <span className="text-sm" style={{ color: "#3C8BF6" }}>
+                      (-{item.discountPercentage}%)
+                    </span>
+                  )}
                 </td>
               </tr>
             ))}
@@ -98,6 +105,8 @@ const Template8 = ({ data }) => {
               <h2 className="text-xl font-bold">{yourCompany.name}</h2>
               <p>{yourCompany.address}</p>
               <p>{yourCompany.phone}</p>
+              <p>RUC: {yourCompany.ruc}</p>
+              <p>Timbrado: {yourCompany.timbrado}</p>
             </div>
           </div>
         </footer>

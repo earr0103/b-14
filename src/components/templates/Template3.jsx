@@ -63,7 +63,14 @@ const Template3 = ({ data }) => {
               </div>
               <div className="p-2 w-24 text-right">{item.quantity}</div>
               <div className="p-2 flex-1 text-right">
-                {formatCurrency(item.total)}
+                {formatCurrency(item.hasDiscount && item.discountPercentage ? 
+                  (item.quantity * item.amount * (1 - item.discountPercentage / 100)) : 
+                  (item.quantity * item.amount))}
+                {item.hasDiscount && item.discountPercentage > 0 && (
+                  <span className="text-sm text-white ml-1">
+                    (-{item.discountPercentage}%)
+                  </span>
+                )}
               </div>
             </div>
           ))}

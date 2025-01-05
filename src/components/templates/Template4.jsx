@@ -35,6 +35,8 @@ const Template4 = ({ data }) => {
             </h2>
             <p>{yourCompany.address || "Dirección de la Empresa"}</p>
             <p>{yourCompany.phone || "Teléfono de la Empresa"}</p>
+            <p>RUC: {yourCompany.ruc || "RUC de la Empresa"}</p>
+            <p>Timbrado: {yourCompany.timbrado || "Timbrado de la Empresa"}</p>
           </div>
         </div>
 
@@ -48,6 +50,8 @@ const Template4 = ({ data }) => {
             </p>
             <p>{yourCompany.address || "Dirección de la Empresa"}</p>
             <p>{yourCompany.phone || "Teléfono de la Empresa"}</p>
+            <p>RUC: {yourCompany.ruc || "RUC de la Empresa"}</p>
+            <p>Timbrado: {yourCompany.timbrado || "Timbrado de la Empresa"}</p>
           </div>
           <div className="bg-gray-100 p-4 rounded">
             <h3 className="text-lg font-semibold text-purple-600 mb-2">
@@ -89,7 +93,14 @@ const Template4 = ({ data }) => {
                   {formatCurrency(item.amount || 0)}
                 </td>
                 <td className="p-2 text-right border border-gray-300">
-                  {formatCurrency((item.quantity || 0) * (item.amount || 0))}
+                  {formatCurrency(item.hasDiscount && item.discountPercentage ? 
+                    ((item.quantity || 0) * (item.amount || 0) * (1 - item.discountPercentage / 100)) : 
+                    ((item.quantity || 0) * (item.amount || 0)))}
+                  {item.hasDiscount && item.discountPercentage > 0 && (
+                    <span className="text-sm text-purple-600 ml-1">
+                      (-{item.discountPercentage}%)
+                    </span>
+                  )}
                 </td>
               </tr>
             ))}

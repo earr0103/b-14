@@ -15,6 +15,8 @@ const Template2 = ({ data }) => {
             </h1>
             <p>{yourCompany.address}</p>
             <p>{yourCompany.phone}</p>
+            <p>RUC: {yourCompany.ruc}</p>
+            <p>Timbrado: {yourCompany.timbrado}</p>
           </div>
           <div className="text-right">
             <h2 className="text-xl font-semibold text-cyan-700">Factura Tributaria</h2>
@@ -73,7 +75,14 @@ const Template2 = ({ data }) => {
                     {formatCurrency(item.amount)}
                   </td>
                   <td className="p-2 text-right border border-gray-300">
-                    {formatCurrency(item.total)}
+                    {formatCurrency(item.hasDiscount && item.discountPercentage ? 
+                      (item.quantity * item.amount * (1 - item.discountPercentage / 100)) : 
+                      (item.quantity * item.amount))}
+                    {item.hasDiscount && item.discountPercentage > 0 && (
+                      <span className="text-sm text-gray-500 ml-1">
+                        (-{item.discountPercentage}%)
+                      </span>
+                    )}
                   </td>
                 </tr>
               ))}
