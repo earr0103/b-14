@@ -3,7 +3,16 @@ document.addEventListener('alpine:init', () => {
     billTo: { name: '', address: '', phone: '' },
     invoice: { date: '', paymentDate: '' },
     from: { name: '', address: '', phone: '', ruc: '', timbrado: '' },
-    items: [{ sno: 1, name: '', description: '', quantity: 0, amount: 0, total: 0 }],
+    items: [{ 
+      sno: 1, 
+      name: '', 
+      description: '', 
+      quantity: 0, 
+      amount: 0, 
+      total: 0,
+      hasDiscount: false,
+      discountPercentage: 0 
+    }],
     tax: 0,
     notes: '',
     templates: [
@@ -25,7 +34,14 @@ document.addEventListener('alpine:init', () => {
     },
 
     calculateSubTotal() {
-      return this.items.reduce((sum, item) => sum + (item.quantity * item.amount), 0).toFixed(2);
+      return this.items.reduce((sum, item) => {
+        const baseTotal = item.quantity * item.amount;
+        if (item.hasDiscount && item.discountPercentage) {
+          const discount = (baseTotal * item.discountPercentage) / 100;
+          return sum + (baseTotal - discount);
+        }
+        return sum + baseTotal;
+      }, 0).toFixed(2);
     },
 
     calculateGrandTotal() {

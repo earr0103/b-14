@@ -2,8 +2,18 @@ import React from 'react';
 import FloatingLabelInput from './FloatingLabelInput';
 import { Trash2 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const ItemDetails = ({ items, handleItemChange, addItem, removeItem }) => {
+  const calculateItemTotal = (item) => {
+    const baseTotal = item.quantity * item.amount;
+    if (item.hasDiscount && item.discountPercentage) {
+      const discount = (baseTotal * item.discountPercentage) / 100;
+      return (baseTotal - discount).toFixed(2);
+    }
+    return baseTotal.toFixed(2);
+  };
+
   return (
     <div className="mb-6">
       <h2 className="text-2xl font-semibold mb-4">Detalles del Artículo</h2>
@@ -34,7 +44,7 @@ const ItemDetails = ({ items, handleItemChange, addItem, removeItem }) => {
               id={`itemTotal${index}`}
               label="Total (₲)"
               type="number"
-              value={(item.quantity * item.amount).toFixed(2)}
+              value={calculateItemTotal(item)}
               disabled
             />
           </div>
@@ -44,6 +54,31 @@ const ItemDetails = ({ items, handleItemChange, addItem, removeItem }) => {
             value={item.description}
             onChange={(e) => handleItemChange(index, 'description', e.target.value)}
           />
+          <div className="flex items-center gap-2 mt-2">
+            <Checkbox
+              id={`discountCheckbox${index}`}
+              checked={item.hasDiscount}
+              onCheckedChange={(checked) => handleItemChange(index, 'hasDiscount', checked)}
+            />
+            <label htmlFor={`discountCheckbox${index}`} className="text-sm">
+              Descuento
+            </label>
+            {item.hasDiscount && (
+              <div className="flex items-center gap-2">
+                <FloatingLabelInput
+                  id={`discountPercentage${index}`}
+                  label="Porcentaje de descuento"
+                  type="number"
+                  value={item.discountPercentage || ''}
+                  onChange={(e) => handleItemChange(index, 'discountPercentage', parseFloat(e.target.value))}
+                  min="0"
+                  max="100"
+                  className="w-24"
+                />
+                <span className="text-sm">%</span>
+              </div>
+            )}
+          </div>
           {index > 0 && (
             <Button
               variant="destructive"
@@ -56,7 +91,13 @@ const ItemDetails = ({ items, handleItemChange, addItem, removeItem }) => {
           )}
         </div>
       ))}
-      <Button type="button" onClick={addItem} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Agregar Artículo</Button>
+      <Button 
+        type="button" 
+        onClick={addItem} 
+        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+      >
+        Agregar Artículo
+      </Button>
     </div>
   );
 };
