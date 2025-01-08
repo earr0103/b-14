@@ -1,9 +1,20 @@
 import React from 'react';
 import BaseTemplate from './BaseTemplate';
 import { formatCurrency } from '../../utils/formatCurrency';
+import { sendInvoiceEmail } from '../../utils/emailUtils';
+import { Button } from "@/components/ui/button";
+import { Mail } from "lucide-react";
 
 const Template1 = ({ data }) => {
   const { billTo, invoice, yourCompany, items, taxPercentage, taxAmount, subTotal, grandTotal, notes } = data;
+
+  const handleSendEmail = () => {
+    if (!yourCompany.email || !billTo.email) {
+      alert('Both company and customer email addresses are required to send email.');
+      return;
+    }
+    sendInvoiceEmail(yourCompany.email, billTo.email, data);
+  };
 
   return (
     <BaseTemplate data={data}>
@@ -12,6 +23,13 @@ const Template1 = ({ data }) => {
           <div className="text-right">
             <h2 className="text-3xl font-semibold">FACTURA</h2>
           </div>
+          <Button 
+            onClick={handleSendEmail}
+            className="bg-blue-500 hover:bg-blue-600 text-white"
+          >
+            <Mail className="mr-2 h-4 w-4" />
+            Send Email
+          </Button>
         </div>
 
         <div className="flex justify-between mb-12">
