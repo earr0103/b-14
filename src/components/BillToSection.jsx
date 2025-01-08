@@ -28,6 +28,13 @@ const BillToSection = ({ billTo, handleInputChange }) => {
           onChange={handleInputChange}
           name="email"
         />
+        <FloatingLabelInput
+          id="billToRuc"
+          label="RUC"
+          value={billTo.ruc}
+          onChange={handleInputChange}
+          name="ruc"
+        />
       </div>
       <FloatingLabelInput
         id="billToAddress"
