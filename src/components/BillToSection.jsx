@@ -21,11 +21,12 @@ const BillToSection = ({ billTo, handleInputChange }) => {
           name="phone"
         />
         <FloatingLabelInput
-          id="billToRuc"
-          label="RUC"
-          value={billTo.ruc}
+          id="billToEmail"
+          label="Email"
+          type="email"
+          value={billTo.email}
           onChange={handleInputChange}
-          name="ruc"
+          name="email"
         />
       </div>
       <FloatingLabelInput
