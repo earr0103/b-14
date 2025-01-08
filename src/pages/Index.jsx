@@ -351,6 +351,14 @@ const Index = () => {
                   onChange={handleInputChange(setYourCompany)}
                   name="timbrado"
                 />
+                <FloatingLabelInput
+                  id="yourCompanyEmail"
+                  label="Email"
+                  value={yourCompany.email}
+                  onChange={handleInputChange(setYourCompany)}
+                  name="email"
+                  type="email"
+                />
               </div>
               <FloatingLabelInput
                 id="yourCompanyAddress"

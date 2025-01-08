@@ -19,8 +19,7 @@ const Template1 = ({ data }) => {
             <h1 className="text-2xl font-bold">{yourCompany.name}</h1>
             <p>{yourCompany.address}</p>
             <p>{yourCompany.phone}</p>
-            <p>RUC: {yourCompany.ruc}</p>
-            <p>Timbrado: {yourCompany.timbrado}</p>
+            <p>Email: {yourCompany.email}</p>
             <p>RUC: {yourCompany.ruc}</p>
             <p>Timbrado: {yourCompany.timbrado}</p>
           </div>
@@ -37,6 +36,8 @@ const Template1 = ({ data }) => {
             <p>{billTo.name}</p>
             <p>{billTo.address}</p>
             <p>{billTo.phone}</p>
+            <p>Email: {billTo.email}</p>
+            <p>RUC: {billTo.ruc}</p>
           </div>
         </div>
 

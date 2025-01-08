@@ -33,16 +33,21 @@ const Receipt1 = ({ data, isPrint = false }) => {
           <div className="mb-2 text-center">
             <div>{yourCompany.name || "N/A"}</div>
             <div>{yourCompany.address || "N/A"}</div>
-            {yourCompany.phone && <div>{yourCompany.phone}</div>}
+            <div>{yourCompany.phone}</div>
+            <div>Email: {yourCompany.email}</div>
+            <div>RUC: {yourCompany.ruc}</div>
+            <div>Timbrado: {yourCompany.timbrado}</div>
           </div>
-            <div>Factura: {invoice.number || "N/A"}</div>
-            <div>
-              Fecha:{" "}
-              {invoice.date
-                ? `${format(new Date(invoice.date), "MM/dd/yyyy")} ${format(new Date(), "HH:mm")}`
-                : "N/A"}
-            </div>
-          <div className="mb-2">Cliente: {billTo || "N/A"}</div>
+          <div>Factura: {invoice.number || "N/A"}</div>
+          <div>
+            Fecha:{" "}
+            {invoice.date
+              ? `${format(new Date(invoice.date), "MM/dd/yyyy")} ${format(new Date(), "HH:mm")}`
+              : "N/A"}
+          </div>
+          <div className="mb-2">Cliente: {billTo.name || "N/A"}</div>
+          <div className="mb-2">Email: {billTo.email || "N/A"}</div>
+          <div className="mb-2">RUC: {billTo.ruc || "N/A"}</div>
           <div className="mb-2">Cajero: {cashier || "N/A"}</div>
           <div className="border-t border-b py-2 mb-2">
             <div className="flex justify-between font-bold mb-2">
