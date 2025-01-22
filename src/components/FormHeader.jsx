@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from "./ui/button";
-import { Download, Send, Trash2, Magic } from "lucide-react";
+import { Download, Send, Trash2, Wand2 } from "lucide-react";
 import { sendInvoiceEmail } from '../utils/emailUtils';
 
 const FormHeader = ({ onClear, onFillDummy, onNavigateToReceipt, formData }) => {
@@ -32,7 +32,7 @@ const FormHeader = ({ onClear, onFillDummy, onNavigateToReceipt, formData }) => 
           className="flex items-center gap-2"
           onClick={onFillDummy}
         >
-          <Magic className="w-4 h-4" />
+          <Wand2 className="w-4 h-4" />
           Fill Dummy Data
         </Button>
       </div>
