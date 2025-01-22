@@ -1,34 +1,60 @@
 import React from 'react';
-import { FiEdit, FiFileText, FiTrash2 } from "react-icons/fi";
+import { Button } from "./ui/button";
+import { Download, Send, Trash2, Magic } from "lucide-react";
+import { sendInvoiceEmail } from '../utils/emailUtils';
 
-const FormHeader = ({ onClear, onFillDummy, onNavigateToReceipt }) => {
+const FormHeader = ({ onClear, onFillDummy, onNavigateToReceipt, formData }) => {
+  const handleSendEmail = () => {
+    const companyEmail = formData?.from?.email;
+    const customerEmail = formData?.billTo?.email;
+    
+    if (!companyEmail || !customerEmail) {
+      alert('Please fill in both company and customer email addresses');
+      return;
+    }
+    
+    sendInvoiceEmail(companyEmail, customerEmail, formData);
+  };
+
   return (
-    <>
-      <h1 className="text-3xl font-bold mb-8 text-center">Generador de Facturas</h1>
-      <div className="fixed top-4 left-4 z-50 flex gap-2">
-        <button
+    <div className="flex justify-between items-center mb-6 sticky top-0 bg-white z-10 p-4 shadow-sm">
+      <div className="flex gap-2">
+        <Button
+          variant="outline"
+          className="flex items-center gap-2"
           onClick={onClear}
-          className="bg-red-500 text-white p-2 rounded-full shadow-lg hover:bg-red-600"
-          aria-label="Limpiar Formulario"
         >
-          <FiTrash2 size={24} />
-        </button>
-        <button
+          <Trash2 className="w-4 h-4" />
+          Clear Form
+        </Button>
+        <Button
+          variant="outline"
+          className="flex items-center gap-2"
           onClick={onFillDummy}
-          className="bg-blue-500 text-white p-2 rounded-full shadow-lg hover:bg-blue-600"
-          aria-label="Llenar con Datos de Ejemplo"
         >
-          <FiEdit size={24} />
-        </button>
+          <Magic className="w-4 h-4" />
+          Fill Dummy Data
+        </Button>
       </div>
-      <button
-        onClick={onNavigateToReceipt}
-        className="fixed top-4 right-4 z-50 bg-green-500 text-white p-2 rounded-full shadow-lg hover:bg-green-600"
-        aria-label="Cambiar a Recibo"
-      >
-        <FiFileText size={24} />
-      </button>
-    </>
+      <div className="flex gap-2">
+        <Button
+          variant="outline"
+          className="flex items-center gap-2"
+          onClick={handleSendEmail}
+        >
+          <Send className="w-4 h-4" />
+          Send Email
+        </Button>
+        <Button
+          variant="default"
+          className="flex items-center gap-2"
+          onClick={onNavigateToReceipt}
+        >
+          <Download className="w-4 h-4" />
+          Download
+        </Button>
+      </div>
+    </div>
   );
 };
 
