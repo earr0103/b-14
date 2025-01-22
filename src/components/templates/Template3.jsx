@@ -1,13 +1,38 @@
 import React from 'react';
 import BaseTemplate from './BaseTemplate';
 import { formatCurrency } from '../../utils/formatCurrency';
+import { Button } from "../ui/button";
+import { Send } from "lucide-react";
+import { sendInvoiceEmail } from '../../utils/emailUtils';
 
 const Template3 = ({ data }) => {
   const { billTo, shipTo, invoice, yourCompany, items, taxPercentage, taxAmount, subTotal, grandTotal, notes } = data;
 
+  const handleSendEmail = () => {
+    const companyEmail = yourCompany?.email;
+    const customerEmail = billTo?.email;
+    
+    if (!companyEmail || !customerEmail) {
+      alert('Please fill in both company and customer email addresses');
+      return;
+    }
+    
+    sendInvoiceEmail(companyEmail, customerEmail, data);
+  };
+
   return (
     <BaseTemplate data={data}>
       <div className="bg-blue-500 text-white p-12">
+        <div className="flex justify-end gap-2 mb-4">
+          <Button
+            variant="outline"
+            className="flex items-center gap-2 bg-white text-blue-500 hover:bg-blue-50"
+            onClick={handleSendEmail}
+          >
+            <Send className="w-4 h-4" />
+            Send Email
+          </Button>
+        </div>
         <div className="flex justify-between items-start mb-8">
           <div>
             <div className="text-white inline-block">
