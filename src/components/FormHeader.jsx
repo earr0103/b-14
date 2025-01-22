@@ -1,29 +1,34 @@
 import React from 'react';
-import { Button } from "./ui/button";
-import { Trash2, Wand2 } from "lucide-react";
+import { FiEdit, FiFileText, FiTrash2 } from "react-icons/fi";
 
-const FormHeader = ({ onClear, onFillDummy }) => {
+const FormHeader = ({ onClear, onFillDummy, onNavigateToReceipt }) => {
   return (
-    <div className="flex justify-between items-center mb-6 sticky top-0 bg-white z-10 p-4 shadow-sm">
-      <div className="flex gap-2">
-        <Button
-          variant="outline"
-          className="flex items-center gap-2"
+    <>
+      <h1 className="text-3xl font-bold mb-8 text-center">Generador de Facturas</h1>
+      <div className="fixed top-4 left-4 z-50 flex gap-2">
+        <button
           onClick={onClear}
+          className="bg-red-500 text-white p-2 rounded-full shadow-lg hover:bg-red-600"
+          aria-label="Limpiar Formulario"
         >
-          <Trash2 className="w-4 h-4" />
-          Clear Form
-        </Button>
-        <Button
-          variant="outline"
-          className="flex items-center gap-2"
+          <FiTrash2 size={24} />
+        </button>
+        <button
           onClick={onFillDummy}
+          className="bg-blue-500 text-white p-2 rounded-full shadow-lg hover:bg-blue-600"
+          aria-label="Llenar con Datos de Ejemplo"
         >
-          <Wand2 className="w-4 h-4" />
-          Fill Dummy Data
-        </Button>
+          <FiEdit size={24} />
+        </button>
       </div>
-    </div>
+      <button
+        onClick={onNavigateToReceipt}
+        className="fixed top-4 right-4 z-50 bg-green-500 text-white p-2 rounded-full shadow-lg hover:bg-green-600"
+        aria-label="Cambiar a Recibo"
+      >
+        <FiFileText size={24} />
+      </button>
+    </>
   );
 };
 

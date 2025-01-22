@@ -296,14 +296,6 @@ const Index = () => {
       <FormHeader 
         onClear={clearForm}
         onFillDummy={fillDummyData}
-        formData={{
-          billTo,
-          invoice,
-          from: yourCompany,
-          items,
-          taxPercentage,
-          notes,
-        }}
         onNavigateToReceipt={() => navigate("/receipt", {
           state: {
             formData: {
