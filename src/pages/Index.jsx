@@ -1,4 +1,4 @@
-import { PackageIcon, Receipt } from "lucide-react";
+import { PackageIcon, Receipt, TrendingUp } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -13,7 +13,7 @@ const Index = () => {
           Sistema de Gestión
         </h1>
         
-        <div className="grid md:grid-cols-2 gap-8 mt-12">
+        <div className="grid md:grid-cols-3 gap-8 mt-12">
           <Card 
             className="p-6 hover:shadow-lg transition-shadow cursor-pointer"
             onClick={() => navigate("/inventory")}
@@ -52,6 +52,27 @@ const Index = () => {
                 onClick={() => navigate("/receipt")}
               >
                 Acceder a Facturación
+              </Button>
+            </div>
+          </Card>
+
+          <Card 
+            className="p-6 hover:shadow-lg transition-shadow cursor-pointer"
+            onClick={() => navigate("/sales")}
+          >
+            <div className="flex flex-col items-center space-y-4">
+              <div className="p-4 rounded-full bg-green-100">
+                <TrendingUp className="h-8 w-8 text-green-600" />
+              </div>
+              <h2 className="text-2xl font-semibold">Ventas</h2>
+              <p className="text-muted-foreground text-center">
+                Analice y controle sus ventas e ingresos
+              </p>
+              <Button 
+                className="w-full mt-4 bg-green-600 hover:bg-green-700"
+                onClick={() => navigate("/sales")}
+              >
+                Acceder a Ventas
               </Button>
             </div>
           </Card>

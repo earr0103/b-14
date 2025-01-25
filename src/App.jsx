@@ -6,6 +6,7 @@ import { navItems } from "./nav-items";
 import TemplatePage from "./pages/TemplatePage";
 import ReceiptPage from "./pages/ReceiptPage";
 import InventoryPage from "./pages/InventoryPage";
+import SalesPage from "./pages/SalesPage";
 import Index from "./pages/Index";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/template" element={<TemplatePage />} />
           <Route path="/receipt" element={<ReceiptPage />} />
           <Route path="/inventory" element={<InventoryPage />} />
+          <Route path="/sales" element={<SalesPage />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
