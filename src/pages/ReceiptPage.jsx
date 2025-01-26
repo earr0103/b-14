@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Loader2, RefreshCw, FileText, RotateCw } from "lucide-react";
+import { Loader2, RefreshCw, FileText, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Receipt1 from "../components/templates/Receipt1";
 import Receipt2 from "../components/templates/Receipt2";
@@ -10,6 +10,10 @@ import { generateReceiptPDF } from "../utils/receiptPDFGenerator";
 import { generateGSTNumber } from "../utils/invoiceCalculations";
 import FloatingLabelInput from "../components/FloatingLabelInput";
 import ItemDetails from "../components/ItemDetails";
+import CompanySection from "../components/CompanySection";
+import BillToSection from "../components/BillToSection";
+import TotalsSection from "../components/TotalsSection";
+import NotesSection from "../components/NotesSection";
 
 const generateRandomInvoiceNumber = () => {
   const length = Math.floor(Math.random() * 6) + 3;
@@ -58,22 +62,33 @@ const ReceiptPage = () => {
   const [isDownloading, setIsDownloading] = useState(false);
   const receiptRef = useRef(null);
 
-  const [billTo, setBillTo] = useState("");
+  const [billTo, setBillTo] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    ruc: "",
+    address: "",
+  });
+
   const [invoice, setInvoice] = useState({
-    date: "",
+    date: new Date().toISOString().split('T')[0],
     number: generateRandomInvoiceNumber(),
   });
+
   const [yourCompany, setYourCompany] = useState({
     name: "",
     address: "",
     phone: "",
-    gst: "",
+    email: "",
+    ruc: "",
+    timbrado: "",
   });
+
   const [cashier, setCashier] = useState("");
   const [items, setItems] = useState([
-    { name: "", description: "", quantity: 0, amount: 0, total: 0 },
+    { name: "", description: "", quantity: 1, amount: 0, hasDiscount: false, discountPercentage: 0 },
   ]);
-  const [taxPercentage, setTaxPercentage] = useState(0);
+  const [taxPercentage, setTaxPercentage] = useState(10);
   const [theme, setTheme] = useState("Receipt1");
   const [notes, setNotes] = useState("");
   const [footer, setFooter] = useState("¡Gracias por elegirnos!");
@@ -82,27 +97,6 @@ const ReceiptPage = () => {
     const randomIndex = Math.floor(Math.random() * footerOptions.length);
     setFooter(footerOptions[randomIndex]);
   };
-
-  useEffect(() => {
-    // Initialize with default values
-    setInvoice((prev) => ({ ...prev, number: generateRandomInvoiceNumber() }));
-    setItems([{ name: "", description: "", quantity: 0, amount: 0, total: 0 }]);
-  }, []);
-
-  useEffect(() => {
-    // Save form data to localStorage whenever it changes
-    const formData = {
-      billTo,
-      invoice,
-      yourCompany,
-      cashier,
-      items,
-      taxPercentage,
-      notes,
-      footer,
-    };
-    localStorage.setItem("receiptFormData", JSON.stringify(formData));
-  }, [billTo, invoice, yourCompany, items, taxPercentage, notes]);
 
   const handleDownloadPDF = async () => {
     if (!isDownloading && receiptRef.current) {
@@ -117,50 +111,47 @@ const ReceiptPage = () => {
     }
   };
 
-  const handleBack = () => {
-    navigate("/");
+  const handleCompanyChange = (e) => {
+    const { name, value } = e.target;
+    setYourCompany(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleInputChange = (setter) => (e) => {
+  const handleBillToChange = (e) => {
     const { name, value } = e.target;
-    setter((prev) => ({ ...prev, [name]: value }));
+    setBillTo(prev => ({ ...prev, [name]: value }));
   };
 
   const handleItemChange = (index, field, value) => {
     const newItems = [...items];
-    newItems[index][field] = value;
-    if (field === "quantity" || field === "amount") {
-      newItems[index].total = newItems[index].quantity * newItems[index].amount;
-    }
+    newItems[index] = { ...newItems[index], [field]: value };
     setItems(newItems);
   };
 
   const addItem = () => {
     setItems([
       ...items,
-      { name: "", description: "", quantity: 0, amount: 0, total: 0 },
+      { name: "", description: "", quantity: 1, amount: 0, hasDiscount: false, discountPercentage: 0 },
     ]);
   };
 
   const removeItem = (index) => {
-    const newItems = items.filter((_, i) => i !== index);
-    setItems(newItems);
+    setItems(items.filter((_, i) => i !== index));
   };
 
   const calculateSubTotal = () => {
-    return items.reduce((sum, item) => sum + item.total, 0).toFixed(2);
+    return items.reduce((sum, item) => {
+      const itemTotal = item.quantity * item.amount;
+      if (item.hasDiscount && item.discountPercentage) {
+        const discount = (itemTotal * item.discountPercentage) / 100;
+        return sum + (itemTotal - discount);
+      }
+      return sum + itemTotal;
+    }, 0);
   };
 
-  const calculateTaxAmount = () => {
-    const subTotal = parseFloat(calculateSubTotal());
-    return (subTotal * (taxPercentage / 100)).toFixed(2);
-  };
-
-  const calculateGrandTotal = () => {
-    const subTotal = parseFloat(calculateSubTotal());
-    const taxAmount = parseFloat(calculateTaxAmount());
-    return (subTotal + taxAmount).toFixed(2);
-  };
+  const subTotal = calculateSubTotal();
+  const taxAmount = (subTotal * (taxPercentage / 100));
+  const grandTotal = subTotal + taxAmount;
 
   return (
     <div className="container mx-auto px-4 py-8 relative">
@@ -181,117 +172,27 @@ const ReceiptPage = () => {
                 Descargando...
               </>
             ) : (
-              "Descargar Recibo PDF"
+              <>
+                <FileText className="mr-2 h-4 w-4" />
+                Descargar PDF
+              </>
             )}
           </Button>
-          <button
-            onClick={() => navigate("/")}
-            className="bg-blue-500 text-white p-2 rounded-full shadow-lg hover:bg-blue-600"
-            aria-label="Cambiar a Generador de Facturas"
-          >
-            <FileText size={24} />
-          </button>
         </div>
       </div>
 
       <div className="flex flex-col md:flex-row gap-8">
         <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
           <form>
-            <div className="mb-6">
-              <h2 className="text-2xl font-semibold mb-4">Su Compañía</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <FloatingLabelInput
-                  id="yourCompanyName"
-                  label="Nombre"
-                  value={yourCompany.name}
-                  onChange={handleInputChange(setYourCompany)}
-                  name="name"
-                />
-                <FloatingLabelInput
-                  id="yourCompanyPhone"
-                  label="Teléfono"
-                  value={yourCompany.phone}
-                  onChange={handleInputChange(setYourCompany)}
-                  name="phone"
-                />
-              </div>
-              <FloatingLabelInput
-                id="yourCompanyAddress"
-                label="Dirección"
-                value={yourCompany.address}
-                onChange={handleInputChange(setYourCompany)}
-                name="address"
-                className="mt-4"
-              />
-              <div className="relative mt-4">
-                <FloatingLabelInput
-                  id="yourCompanyGST"
-                  label="Número de GST"
-                  value={yourCompany.gst}
-                  onChange={(e) => {
-                    const value = e.target.value.slice(0, 15);
-                    handleInputChange(setYourCompany)({
-                      target: { name: "gst", value },
-                    });
-                  }}
-                  name="gst"
-                  maxLength={15}
-                />
-                <button
-                  type="button"
-                  onClick={() => {
-                    const newGST = generateGSTNumber();
-                    setYourCompany((prev) => ({ ...prev, gst: newGST }));
-                  }}
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 rounded-full hover:bg-gray-200"
-                  title="Generar nuevo número de GST"
-                >
-                  <RotateCw size={16} />
-                </button>
-              </div>
-              <FloatingLabelInput
-                id="cashier"
-                label="Cajero"
-                value={cashier}
-                onChange={(e) => setCashier(e.target.value)}
-                name="cashier"
-                className="mt-4"
-              />
-            </div>
+            <CompanySection
+              yourCompany={yourCompany}
+              handleInputChange={handleCompanyChange}
+            />
 
-            <div className="mb-6">
-              <h2 className="text-2xl font-semibold mb-4">Factura a</h2>
-              <FloatingLabelInput
-                id="billTo"
-                label="Factura a"
-                value={billTo}
-                onChange={(e) => setBillTo(e.target.value)}
-                name="billTo"
-              />
-            </div>
-
-            <div className="mb-6">
-              <h2 className="text-2xl font-semibold mb-4">
-                Información de la factura
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <FloatingLabelInput
-                  id="invoiceNumber"
-                  label="Número de factura"
-                  value={invoice.number}
-                  onChange={handleInputChange(setInvoice)}
-                  name="number"
-                />
-                <FloatingLabelInput
-                  id="invoiceDate"
-                  label="Fecha de la factura"
-                  type="date"
-                  value={invoice.date}
-                  onChange={handleInputChange(setInvoice)}
-                  name="date"
-                />
-              </div>
-            </div>
+            <BillToSection
+              billTo={billTo}
+              handleInputChange={handleBillToChange}
+            />
 
             <ItemDetails
               items={items}
@@ -300,64 +201,19 @@ const ReceiptPage = () => {
               removeItem={removeItem}
             />
 
-            <div className="mb-6">
-              <h3 className="text-lg font-medium mb-2">Totales</h3>
-              <div className="flex justify-between mb-2">
-                <span>Subtotal:</span>
-                <span>₲ {calculateSubTotal()}</span>
-              </div>
-              <div className="flex justify-between mb-2">
-                <span>Impuesto (%):</span>
-                <input
-                  type="number"
-                  value={taxPercentage}
-                  onChange={(e) =>
-                    setTaxPercentage(parseFloat(e.target.value) || 0)
-                  }
-                  className="w-24 p-2 border rounded"
-                  min="0"
-                  max="28"
-                  step="1"
-                />
-              </div>
-              <div className="flex justify-between mb-2">
-                <span>Monto del impuesto:</span>
-                <span>₲ {calculateTaxAmount()}</span>
-              </div>
-              <div className="flex justify-between font-bold">
-                <span>Total:</span>
-                <span>₲ {calculateGrandTotal()}</span>
-              </div>
-            </div>
+            <TotalsSection
+              subTotal={subTotal.toFixed(2)}
+              taxPercentage={taxPercentage}
+              handleTaxPercentageChange={(e) => setTaxPercentage(parseFloat(e.target.value) || 0)}
+              taxAmount={taxAmount.toFixed(2)}
+              grandTotal={grandTotal.toFixed(2)}
+            />
 
-            <div className="mb-6">
-              <h3 className="text-lg font-medium mb-2">Notas</h3>
-              <textarea
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-                className="w-full p-2 border rounded"
-                rows="4"
-              ></textarea>
-            </div>
-            <div className="mb-6">
-              <div className="flex items-center mb-2">
-                <h3 className="text-lg font-medium">Pie de página</h3>
-                <button
-                  type="button"
-                  onClick={refreshFooter}
-                  className="ml-2 p-1 rounded-full hover:bg-gray-200"
-                  title="Actualizar pie de página"
-                >
-                  <RefreshCw size={16} />
-                </button>
-              </div>
-              <textarea
-                value={footer}
-                onChange={(e) => setFooter(e.target.value)}
-                className="w-full p-2 border rounded"
-                rows="2"
-              ></textarea>
-            </div>
+            <NotesSection
+              notes={notes}
+              setNotes={setNotes}
+              refreshNotes={refreshFooter}
+            />
           </form>
         </div>
 
@@ -366,50 +222,19 @@ const ReceiptPage = () => {
           <div className="mb-4 flex items-center">
             <h3 className="text-lg font-medium mr-4">Tipo de recibo</h3>
             <div className="flex gap-4">
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="theme"
-                  value="Receipt1"
-                  checked={theme === "Receipt1"}
-                  onChange={() => setTheme("Receipt1")}
-                  className="mr-2"
-                />
-                Recibo 1
-              </label>
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="theme"
-                  value="Receipt2"
-                  checked={theme === "Receipt2"}
-                  onChange={() => setTheme("Receipt2")}
-                  className="mr-2"
-                />
-                Recibo 2
-              </label>
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="theme"
-                  value="Receipt3"
-                  checked={theme === "Receipt3"}
-                  onChange={() => setTheme("Receipt3")}
-                  className="mr-2"
-                />
-                Recibo 3
-              </label>
-              <label className="flex items-center">
-                <input
-                  type="radio"
-                  name="theme"
-                  value="Receipt4"
-                  checked={theme === "Receipt4"}
-                  onChange={() => setTheme("Receipt4")}
-                  className="mr-2"
-                />
-                Recibo 4
-              </label>
+              {["Receipt1", "Receipt2", "Receipt3", "Receipt4"].map((receiptType) => (
+                <label key={receiptType} className="flex items-center">
+                  <input
+                    type="radio"
+                    name="theme"
+                    value={receiptType}
+                    checked={theme === receiptType}
+                    onChange={(e) => setTheme(e.target.value)}
+                    className="mr-2"
+                  />
+                  {receiptType.replace(/Receipt/, "Recibo ")}
+                </label>
+              ))}
             </div>
           </div>
           <div ref={receiptRef} className="w-[380px] mx-auto border shadow-lg">
