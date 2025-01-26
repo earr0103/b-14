@@ -1,37 +1,125 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Loader2 } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Loader2, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import InvoiceTemplate from '../components/InvoiceTemplate';
 import { generatePDF } from '../utils/pdfGenerator';
 import { templates } from '../utils/templateRegistry';
+import CompanySection from '../components/CompanySection';
+import BillToSection from '../components/BillToSection';
+import InvoiceInformation from '../components/InvoiceInformation';
+import ItemDetails from '../components/ItemDetails';
+import NotesSection from '../components/NotesSection';
+import TemplateGallery from '../components/TemplateGallery';
 
 const TemplatePage = () => {
-  const location = useLocation();
   const navigate = useNavigate();
-  const [formData, setFormData] = useState(null);
-  const [currentTemplate, setCurrentTemplate] = useState(1);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [currentTemplate, setCurrentTemplate] = useState(1);
+  const [formData, setFormData] = useState({
+    yourCompany: {
+      name: '',
+      address: '',
+      phone: '',
+      email: '',
+      ruc: '',
+      timbrado: ''
+    },
+    billTo: {
+      name: '',
+      address: '',
+      phone: '',
+      email: '',
+      ruc: ''
+    },
+    invoice: {
+      number: '',
+      date: '',
+      paymentDate: ''
+    },
+    items: [
+      { name: '', description: '', quantity: 1, amount: 0, hasDiscount: false, discountPercentage: 0 }
+    ],
+    taxPercentage: 10,
+    notes: ''
+  });
 
   useEffect(() => {
-    if (location.state && location.state.formData) {
-      setFormData(location.state.formData);
-      setCurrentTemplate(location.state.selectedTemplate || 1);
-    } else {
-      // If no form data in location state, try to load from localStorage
-      const savedFormData = localStorage.getItem('formData');
-      if (savedFormData) {
-        setFormData(JSON.parse(savedFormData));
-      }
+    const savedFormData = localStorage.getItem('invoiceFormData');
+    if (savedFormData) {
+      setFormData(JSON.parse(savedFormData));
     }
-  }, [location.state]);
+  }, []);
 
-  const handleTemplateChange = (templateNumber) => {
+  useEffect(() => {
+    localStorage.setItem('invoiceFormData', JSON.stringify(formData));
+  }, [formData]);
+
+  const handleCompanyChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      yourCompany: {
+        ...prev.yourCompany,
+        [name]: value
+      }
+    }));
+  };
+
+  const handleBillToChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      billTo: {
+        ...prev.billTo,
+        [name]: value
+      }
+    }));
+  };
+
+  const handleInvoiceChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      invoice: {
+        ...prev.invoice,
+        [name]: value
+      }
+    }));
+  };
+
+  const handleItemChange = (index, field, value) => {
+    const newItems = [...formData.items];
+    newItems[index] = {
+      ...newItems[index],
+      [field]: value
+    };
+    setFormData(prev => ({
+      ...prev,
+      items: newItems
+    }));
+  };
+
+  const addItem = () => {
+    setFormData(prev => ({
+      ...prev,
+      items: [...prev.items, { name: '', description: '', quantity: 1, amount: 0, hasDiscount: false, discountPercentage: 0 }]
+    }));
+  };
+
+  const removeItem = (index) => {
+    setFormData(prev => ({
+      ...prev,
+      items: prev.items.filter((_, i) => i !== index)
+    }));
+  };
+
+  const handleTemplateClick = (templateNumber) => {
     setCurrentTemplate(templateNumber);
   };
 
   const handleDownloadPDF = async () => {
-    if (formData && !isDownloading) {
+    if (!isDownloading) {
       setIsDownloading(true);
       try {
         await generatePDF(formData, currentTemplate);
@@ -43,52 +131,91 @@ const TemplatePage = () => {
     }
   };
 
-  const handleBack = () => {
-    navigate('/');
+  const calculateSubTotal = () => {
+    return formData.items.reduce((sum, item) => {
+      const itemTotal = item.hasDiscount && item.discountPercentage
+        ? item.quantity * item.amount * (1 - item.discountPercentage / 100)
+        : item.quantity * item.amount;
+      return sum + itemTotal;
+    }, 0);
   };
 
-  if (!formData) {
-    return <div>Loading...</div>;
-  }
+  const calculateTaxAmount = () => {
+    const subTotal = calculateSubTotal();
+    return (subTotal * (formData.taxPercentage / 100));
+  };
+
+  const calculateGrandTotal = () => {
+    const subTotal = calculateSubTotal();
+    const taxAmount = calculateTaxAmount();
+    return subTotal + taxAmount;
+  };
+
+  const refreshNotes = () => {
+    setFormData(prev => ({
+      ...prev,
+      notes: ''
+    }));
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
-        <Button variant="ghost" onClick={handleBack}>
-          <ArrowLeft className="mr-2 h-4 w-4" /> Back
+        <Button variant="ghost" onClick={() => navigate('/')}>
+          <ArrowLeft className="mr-2 h-4 w-4" /> Volver
         </Button>
         <Button onClick={handleDownloadPDF} disabled={isDownloading}>
           {isDownloading ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Downloading...
+              Descargando...
             </>
           ) : (
-            "Download PDF"
+            "Descargar PDF"
           )}
         </Button>
       </div>
 
-      <div className="mb-8 overflow-x-auto">
-        <div className="flex space-x-4">
-          {templates.map((template, index) => (
-            <div
-              key={index}
-              className={`cursor-pointer p-4 border rounded ${
-                currentTemplate === index + 1
-                  ? "border-blue-500"
-                  : "border-gray-300"
-              }`}
-              onClick={() => handleTemplateChange(index + 1)}
-            >
-              {template.name}
-            </div>
-          ))}
+      <div className="flex flex-col md:flex-row gap-8">
+        <div className="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md">
+          <CompanySection
+            yourCompany={formData.yourCompany}
+            handleInputChange={handleCompanyChange}
+          />
+          <BillToSection
+            billTo={formData.billTo}
+            handleInputChange={handleBillToChange}
+          />
+          <InvoiceInformation
+            invoice={formData.invoice}
+            handleInputChange={handleInvoiceChange}
+          />
+          <ItemDetails
+            items={formData.items}
+            handleItemChange={handleItemChange}
+            addItem={addItem}
+            removeItem={removeItem}
+          />
+          <NotesSection
+            notes={formData.notes}
+            setNotes={(notes) => setFormData(prev => ({ ...prev, notes }))}
+            refreshNotes={refreshNotes}
+          />
         </div>
+
+        <TemplateGallery handleTemplateClick={handleTemplateClick} />
       </div>
 
-      <div className="w-[210mm] h-[297mm] mx-auto border shadow-lg">
-        <InvoiceTemplate data={formData} templateNumber={currentTemplate} />
+      <div className="mt-8 w-[210mm] mx-auto border shadow-lg">
+        <InvoiceTemplate
+          data={{
+            ...formData,
+            subTotal: calculateSubTotal(),
+            taxAmount: calculateTaxAmount(),
+            grandTotal: calculateGrandTotal()
+          }}
+          templateNumber={currentTemplate}
+        />
       </div>
     </div>
   );
