@@ -15,6 +15,12 @@ export const calculateGrandTotal = (subTotal, taxPercentage) => {
   );
 };
 
+export const generateRandomInvoiceNumber = () => {
+  const timestamp = new Date().getTime();
+  const random = Math.floor(Math.random() * 1000);
+  return `INV-${timestamp}-${random}`;
+};
+
 export const generateGSTNumber = () => {
   var stateCode = 22;
   var panNumber = generatePANNumber();
