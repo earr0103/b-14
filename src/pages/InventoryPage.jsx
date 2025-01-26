@@ -1,7 +1,8 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from "@/components/ui/button";
-import { Plus, AlertTriangle } from "lucide-react";
+import { Plus, AlertTriangle, ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import InventoryTable from '../components/inventory/InventoryTable';
 import AddProductDialog from '../components/inventory/AddProductDialog';
 import { useToast } from "@/components/ui/use-toast";
@@ -9,6 +10,7 @@ import { useToast } from "@/components/ui/use-toast";
 const InventoryPage = () => {
   const [isAddDialogOpen, setIsAddDialogOpen] = React.useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   // This is a placeholder query - you'll need to implement the actual data fetching
   const { data: products, isLoading } = useQuery({
@@ -27,7 +29,12 @@ const InventoryPage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Gestión de Inventario</h1>
+        <div className="flex items-center gap-4">
+          <Button variant="ghost" onClick={() => navigate('/')}>
+            <ArrowLeft className="mr-2 h-4 w-4" /> Volver
+          </Button>
+          <h1 className="text-2xl font-bold">Gestión de Inventario</h1>
+        </div>
         <Button onClick={() => setIsAddDialogOpen(true)}>
           <Plus className="h-4 w-4 mr-2" />
           Agregar Producto

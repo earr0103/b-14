@@ -164,9 +164,12 @@ const ReceiptPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-8 relative">
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex items-center gap-4 mb-8">
+        <Button variant="ghost" onClick={() => navigate('/')}>
+          <ArrowLeft className="mr-2 h-4 w-4" /> Volver
+        </Button>
         <h1 className="text-3xl font-bold">Generador de Recibos</h1>
-        <div className="flex items-center">
+        <div className="flex items-center ml-auto">
           <Button
             onClick={handleDownloadPDF}
             disabled={isDownloading}

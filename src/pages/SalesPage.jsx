@@ -1,11 +1,20 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChartBar, TrendingUp, DollarSign, FileText } from "lucide-react";
+import { ChartBar, TrendingUp, DollarSign, FileText, ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const SalesPage = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-background p-8">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8">Control de Ventas</h1>
+        <div className="flex items-center gap-4 mb-8">
+          <Button variant="ghost" onClick={() => navigate('/')}>
+            <ArrowLeft className="mr-2 h-4 w-4" /> Volver
+          </Button>
+          <h1 className="text-4xl font-bold">Control de Ventas</h1>
+        </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <Card>

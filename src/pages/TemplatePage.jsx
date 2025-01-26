@@ -160,10 +160,11 @@ const TemplatePage = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex items-center gap-4 mb-8">
         <Button variant="ghost" onClick={() => navigate('/')}>
           <ArrowLeft className="mr-2 h-4 w-4" /> Volver
         </Button>
+        <h1 className="text-3xl font-bold">Generador de Facturas</h1>
         <Button onClick={handleDownloadPDF} disabled={isDownloading}>
           {isDownloading ? (
             <>
