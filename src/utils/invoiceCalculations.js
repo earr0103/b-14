@@ -6,7 +6,10 @@ export const generateRandomInvoiceNumber = () => {
 
 export const calculateSubTotal = (items) => {
   return items.reduce((total, item) => {
-    return total + (item.quantity * item.amount);
+    const itemAmount = item.hasDiscount && item.discountPercentage
+      ? item.quantity * item.amount * (1 - item.discountPercentage / 100)
+      : item.quantity * item.amount;
+    return total + itemAmount;
   }, 0);
 };
 
