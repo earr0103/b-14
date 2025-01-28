@@ -1,11 +1,11 @@
-import React, { useRef } from 'react';
+import React, { forwardRef } from 'react';
 import { useReceiptForm } from './ReceiptFormProvider';
 import Receipt1 from '../templates/Receipt1';
 import Receipt2 from '../templates/Receipt2';
 import Receipt3 from '../templates/Receipt3';
 import Receipt4 from '../templates/Receipt4';
 
-const ReceiptPreview = () => {
+const ReceiptPreview = forwardRef((props, ref) => {
   const {
     billTo,
     invoice,
@@ -19,8 +19,6 @@ const ReceiptPreview = () => {
     footer,
   } = useReceiptForm();
   
-  const receiptRef = useRef(null);
-
   const receiptData = {
     billTo,
     invoice,
@@ -53,7 +51,7 @@ const ReceiptPreview = () => {
           ))}
         </div>
       </div>
-      <div ref={receiptRef} className="w-[380px] mx-auto border shadow-lg">
+      <div ref={ref} className="w-[380px] mx-auto border shadow-lg">
         {theme === "Receipt1" && <Receipt1 data={receiptData} />}
         {theme === "Receipt2" && <Receipt2 data={receiptData} />}
         {theme === "Receipt3" && <Receipt3 data={receiptData} />}
@@ -61,6 +59,8 @@ const ReceiptPreview = () => {
       </div>
     </div>
   );
-};
+});
+
+ReceiptPreview.displayName = 'ReceiptPreview';
 
 export default ReceiptPreview;
